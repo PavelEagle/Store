@@ -9,37 +9,45 @@ using System.Threading.Tasks;
 
 namespace Store.DB.Storages
 {
-    public class StoreStorage
+    public class ProductStorage
     {
         private readonly IDbConnection connection;
         private readonly IDbTransaction dbTransaction;
         private string connStr = "Data Source=DESKTOP-C936NF2\\SQLEXPRESS;Initial Catalog=Store;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-        public StoreStorage(IOptions<StorageOptions> storageOptions)
+        public ProductStorage(IOptions<StorageOptions> storageOptions)
         {
             this.connection = new SqlConnection(storageOptions.Value.DBConnectionString);
         }
-        public StoreStorage() 
+        public ProductStorage()
         {
             connection = new SqlConnection(connStr);
         }
 
         internal static class SpName
         {
-            public const string CityInsert = "City_Insert";
+            public const string ProductGetById = "Product_GetById";
+
         }
 
-        public async ValueTask<City> CityInsert(City model)
+        public async ValueTask<Product> GetProductById(int id)
         {
             try
             {
-                var result = await connection.QueryAsync<City>(
-                    SpName.CityInsert,
-                    new 
-                    { 
-                        model.Name,
-                        model.RU
+                var result = await connection.QueryAsync<Product, Subcategory, Category, Product>(
+                    SpName.ProductGetById,
+                    (product, subcategory, category) =>
+                    {
+                        Subcategory sabcat = subcategory;
+                        sabcat.Category = category;
+
+                        Product newProd = product;
+                        newProd.Subcategory = sabcat;
+                        return newProd;
                     },
-                    commandType: CommandType.StoredProcedure);
+                    param: new { id },
+                    //dbTransaction,
+                    commandType: CommandType.StoredProcedure,
+                    splitOn: "Id,Id");
                 return result.FirstOrDefault();
             }
             catch (SqlException ex)
@@ -48,5 +56,4 @@ namespace Store.DB.Storages
             }
         }
     }
-    
 }
