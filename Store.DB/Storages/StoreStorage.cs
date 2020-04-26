@@ -9,18 +9,13 @@ using System.Threading.Tasks;
 
 namespace Store.DB.Storages
 {
-    public class StoreStorage
+    public class StoreStorage : IStoreStorage
     {
         private readonly IDbConnection connection;
         private readonly IDbTransaction dbTransaction;
-        private string connStr = "Data Source=DESKTOP-C936NF2\\SQLEXPRESS;Initial Catalog=Store;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         public StoreStorage(IOptions<StorageOptions> storageOptions)
         {
             this.connection = new SqlConnection(storageOptions.Value.DBConnectionString);
-        }
-        public StoreStorage() 
-        {
-            connection = new SqlConnection(connStr);
         }
 
         internal static class SpName
@@ -34,8 +29,8 @@ namespace Store.DB.Storages
             {
                 var result = await connection.QueryAsync<City>(
                     SpName.CityInsert,
-                    new 
-                    { 
+                    new
+                    {
                         model.Name,
                         model.RU
                     },
@@ -48,5 +43,5 @@ namespace Store.DB.Storages
             }
         }
     }
-    
+
 }

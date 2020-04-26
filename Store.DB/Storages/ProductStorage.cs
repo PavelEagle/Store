@@ -9,18 +9,13 @@ using System.Threading.Tasks;
 
 namespace Store.DB.Storages
 {
-    public class ProductStorage
+    public class ProductStorage : IProductStorage
     {
         private readonly IDbConnection connection;
         private readonly IDbTransaction dbTransaction;
-        private string connStr = "Data Source=DESKTOP-C936NF2\\SQLEXPRESS;Initial Catalog=Store;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         public ProductStorage(IOptions<StorageOptions> storageOptions)
         {
             this.connection = new SqlConnection(storageOptions.Value.DBConnectionString);
-        }
-        public ProductStorage()
-        {
-            connection = new SqlConnection(connStr);
         }
 
         internal static class SpName
@@ -47,7 +42,7 @@ namespace Store.DB.Storages
                     param: new { id },
                     //dbTransaction,
                     commandType: CommandType.StoredProcedure,
-                    splitOn: "Id,Id");
+                    splitOn: "Id");
                 return result.FirstOrDefault();
             }
             catch (SqlException ex)

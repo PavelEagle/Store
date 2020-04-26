@@ -1,4 +1,4 @@
 {
     "StoreApiUrl": "https://localhost:5001",
-    "DBConnectionString": "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=master;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"
+    "DBConnectionString": "Data Source=.\\SQLEXPRESS;Initial Catalog=Store;Integrated Security=True"
 }
