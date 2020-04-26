@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using Store.API.Controllers;
 using Store.DB.Storages;
+using Store.Repository;
 
 namespace Store.API.Configuration
 {
@@ -12,6 +13,7 @@ namespace Store.API.Configuration
             builder.RegisterType<ProductStorage>().As<IProductStorage>();
             builder.RegisterType<StoreStorage>().As<IStoreStorage>();
             builder.RegisterType<StoreController>().As<IStoreController>();
+            builder.RegisterType<ProductRepository>().As<IProductRepository>();
         }
     }
 }

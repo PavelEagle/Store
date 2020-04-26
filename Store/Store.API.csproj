@@ -15,6 +15,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Store.Core\Store.Core.csproj" />
     <ProjectReference Include="..\Store.DB\Store.DB.csproj" />
+    <ProjectReference Include="..\Store.Repository\Store.Repository.csproj" />
   </ItemGroup>
 
 

@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace Store.DB.Storages
 {
-    public class ProductStorage : IProductStorage
+    public class ProductStorage : Transaction, IProductStorage
     {
         private readonly IDbConnection connection;
-        private readonly IDbTransaction dbTransaction;
+
         public ProductStorage(IOptions<StorageOptions> storageOptions)
         {
             this.connection = new SqlConnection(storageOptions.Value.DBConnectionString);
@@ -40,7 +40,7 @@ namespace Store.DB.Storages
                         return newProd;
                     },
                     param: new { id },
-                    //dbTransaction,
+                    _dbTransaction,
                     commandType: CommandType.StoredProcedure,
                     splitOn: "Id");
                 return result.FirstOrDefault();
@@ -49,6 +49,11 @@ namespace Store.DB.Storages
             {
                 throw ex;
             }
+        }
+
+        public void Transactionstart(IDbTransaction dbTransaction)
+        {
+            _dbTransaction = dbTransaction;
         }
     }
 }

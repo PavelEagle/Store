@@ -1,10 +1,9 @@
 ﻿using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Store.API.Models.Mapping;
 using Store.API.Models.OutputModels;
 using Store.DB.Models;
-using Store.DB.Storages;
+using Store.Repository;
 
 namespace Store.API.Controllers
 {
@@ -12,21 +11,26 @@ namespace Store.API.Controllers
     [ApiController]
     public class ProductController : ControllerBase, IProductController
     {
-
+        
         private readonly IMapper _mapper;
-        private readonly IProductStorage _productStorage;
-        public ProductController(IMapper mapper, IProductStorage productStorage)
+        private readonly IProductRepository _productRepository;
+        public ProductController(IMapper mapper, IProductRepository productRepository)
         {
-            _productStorage = productStorage;
+            _productRepository = productRepository;
             _mapper = mapper;
         }
         [HttpGet("{productId}")]
         public async ValueTask<ActionResult<ProductOutputModel>> GetProductById(int productId)
         {
             if (productId < 1) return BadRequest("LeadId can not be less than one.");
-            var result = await _productStorage.GetProductById(productId);
-            return Ok(_mapper.Map<ProductOutputModel>(result));
-            //return Ok(ProductMapper.ToOutputModel(result));
+            var result = await _productRepository.GetProductById(productId);
+            if (result.IsOkay)
+            {
+                if (result.RequestData == null) { return NotFound("Lead not found"); }
+                return Ok(_mapper.Map<ProductOutputModel>(result.RequestData));
+            }
+            return Problem($"Transaction failed {result.ExMessage}", statusCode: 520);
+
         }
 
         [HttpPost]
