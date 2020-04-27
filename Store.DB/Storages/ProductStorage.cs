@@ -21,10 +21,12 @@ namespace Store.DB.Storages
         internal static class SpName
         {
             public const string ProductGetById = "Product_GetById";
+            public const string ProductDeleteById = "Product_DeleteById";
+            public const string ProductInsertOrUpdate = "Product_InsertOrUpdate";
 
         }
 
-        public async ValueTask<Product> GetProductById(int id)
+        public async ValueTask<Product> ProductGetById(int id)
         {
             try
             {
@@ -50,6 +52,51 @@ namespace Store.DB.Storages
                 throw ex;
             }
         }
+
+        public async ValueTask<Product> ProductInsertOrUpdate(Product product)
+        {
+            try
+            {
+                DynamicParameters leadModelParams = new DynamicParameters(new
+                {
+                    product.Id,
+                    product.Manufacturer,
+                    product.Model,
+                    product.Price,
+                    product.Subcategory
+                });
+                var result = await connection.QueryAsync<long>(
+                    SpName.ProductInsertOrUpdate,
+                    leadModelParams,
+                    commandType: CommandType.StoredProcedure);
+                product.Id = (int)result.FirstOrDefault();
+                return await ProductGetById((int)product.Id);
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+        }
+
+
+        public async ValueTask ProductDeleteById(int id)
+        {
+            try
+            {
+                await connection.QueryAsync<long>(
+                    SpName.ProductDeleteById,
+                    new { id },
+                    commandType: CommandType.StoredProcedure
+                );
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+        }
+
+
+
 
         public void Transactionstart(IDbTransaction dbTransaction)
         {

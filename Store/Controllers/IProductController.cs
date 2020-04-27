@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Store.API.Models.InputModels;
 using Store.API.Models.OutputModels;
 using Store.DB.Models;
 using System.Threading.Tasks;
@@ -9,6 +10,6 @@ namespace Store.API.Controllers
     {
         ValueTask<ActionResult<Order>> DeleteProduct(int productId);
         ValueTask<ActionResult<ProductOutputModel>> GetProductById(int productId);
-        ValueTask<ActionResult<Product>> InsertOrUpdateProduct(object leadInputModel);
+        ValueTask<ActionResult<ProductOutputModel>> InsertOrUpdateProduct(ProductInputModel productInputModel);
     }
 }
