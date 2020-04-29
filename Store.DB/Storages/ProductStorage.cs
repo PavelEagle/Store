@@ -30,7 +30,7 @@ namespace Store.DB.Storages
         {
             try
             {
-                var result = await connection.QueryAsync<Product, Subcategory, Category, Product>(
+                var result = await connection.QueryAsync<Product, Subcategory, Dictionary, Product>(
                     SpName.ProductGetById,
                     (product, subcategory, category) =>
                     {

@@ -7,6 +7,6 @@ namespace Store.API.Controllers
 {
     public interface IStoreController
     {
-        ValueTask<ActionResult<City>> CityInsert(CityInputModel leadInputModel);
+        //ValueTask<ActionResult<City>> CityInsert(CityInputModel leadInputModel);
     }
 }

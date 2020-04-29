@@ -12,6 +12,7 @@ namespace Store.API.Configuration
                 .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(scr => scr.Subcategory.Category.Name))
                 .ForMember(dest => dest.Subcategory, opt => opt.MapFrom(scr => scr.Subcategory.Name));
 
+            CreateMap<MoneyInCity, MoneyInCityOutputModel>();
         }
     }
 }

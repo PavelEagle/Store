@@ -14,6 +14,8 @@ namespace Store.API.Configuration
             builder.RegisterType<StoreStorage>().As<IStoreStorage>();
             builder.RegisterType<StoreController>().As<IStoreController>();
             builder.RegisterType<ProductRepository>().As<IProductRepository>();
+            builder.RegisterType<ReportStorage>().As<IReportStorage>();
+            builder.RegisterType<ReportRepository>().As<IReportRepository>();
         }
     }
 }
