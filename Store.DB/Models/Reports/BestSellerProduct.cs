@@ -2,7 +2,7 @@
 {
     public class BestSellerProduct : Product
     {
-        public Store Store { get; set; }
-
+        public string City { get; set; }
+        public string Address { get; set; }
     }
 }

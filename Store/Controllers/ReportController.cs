@@ -9,7 +9,7 @@ namespace Store.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ReportController : ControllerBase
+    public class ReportController : ControllerBase, IReportController
     {
         private readonly IMapper _mapper;
         private readonly IReportRepository _reportRepository;
@@ -23,7 +23,7 @@ namespace Store.API.Controllers
         [HttpGet("money-in-city")]
         public async ValueTask<ActionResult<List<MoneyInCityOutputModel>>> GetMoneyInEachCity()
         {
-            var result = await _reportRepository.ProductGetById();
+            var result = await _reportRepository.GetMoneyInEachCity();
             if (result.IsOkay)
             {
                 return Ok(_mapper.Map<List<MoneyInCityOutputModel>>(result.RequestData));
@@ -38,9 +38,14 @@ namespace Store.API.Controllers
         }
 
         [HttpGet("best-selling-product")]
-        public async ValueTask<ActionResult<object>> GetBestSellingProduct()
+        public async ValueTask<ActionResult<BestSellerProductOutputModel>> GetBestSellingProduct()
         {
-            return new object();
+            var result = await _reportRepository.GetBestSellingProduct();
+            if (result.IsOkay)
+            {
+                return Ok(_mapper.Map<List<BestSellerProductOutputModel>>(result.RequestData));
+            }
+            return Problem($"Transaction failed {result.ExMessage}", statusCode: 520);
         }
 
         [HttpGet("products-in-warehouse-and-absent-in-moscow-and-spb")]

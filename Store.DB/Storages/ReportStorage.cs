@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Options;
 using Store.Core.ConfigurationOptions;
 using Store.DB.Models;
+using Store.DB.Models.Reports;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -16,12 +17,14 @@ namespace  Store.DB.Storages
 
         public ReportStorage(IOptions<StorageOptions> storageOptions)
         {
-            this.connection = new SqlConnection(storageOptions.Value.DBConnectionString);
+            connection = new SqlConnection(storageOptions.Value.DBConnectionString);
         }
 
         internal static class SpName
         {
             public const string GetMoneyInEachCity = "Report_GetMoneyInEachCity";
+            public const string GetBestSellingProduct = "Report_GetBestSellingProduct";
+
         }
 
         public async ValueTask<List<MoneyInCity>> GetMoneyInEachCity()
@@ -30,6 +33,22 @@ namespace  Store.DB.Storages
             {
                 var result = await connection.QueryAsync<MoneyInCity>(
                     SpName.GetMoneyInEachCity,
+                    null,
+                    commandType: CommandType.StoredProcedure);
+                return result.ToList();
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async ValueTask<List<BestSellerProduct>> GetBestSellingProduct()
+        {
+            try
+            {
+                var result = await connection.QueryAsync<BestSellerProduct>(
+                    SpName.GetBestSellingProduct,
                     null,
                     commandType: CommandType.StoredProcedure);
                 return result.ToList();
