@@ -52,12 +52,13 @@ namespace  WebStore.DB.Storages
         {
             try
             {
-                var result = await connection.QueryAsync<ProductInStore, Models.Store, ProductInStore>(
+                var result = await connection.QueryAsync<City, Store, ProductInStore, ProductInStore>(
                     SpName.GetBestSellingProduct,
-                    (bsproduct, store) =>
+                    (city, store, bsproduct) =>
                     {
                         ProductInStore newProduct = bsproduct;
                         newProduct.Store = store;
+                        store.City = city;
                         return newProduct;
                     },
                     null,
