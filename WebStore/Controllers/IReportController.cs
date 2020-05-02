@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using WebStore.API.Models.InputModels;
 using WebStore.API.Models.OutputModels;
 
 namespace WebStore.API.Controllers
@@ -10,7 +9,7 @@ namespace WebStore.API.Controllers
     {
         ValueTask<ActionResult<ProductInStoreOutputModel>> GetBestSellingProduct();
         ValueTask<ActionResult<CountProductInCategoryOutputModel>> GetCategoryWithFiveAndMoreProduct();
-        ValueTask<ActionResult<OrderInfoOutputModel>> GetInfoAboutOrdersByDate(DateOrderInputModel model);
+        ValueTask<ActionResult<OrderInfoOutputModel>> GetInfoAboutOrdersByDate(string startDate, string EndDate);
         ValueTask<ActionResult<List<MoneyInCityOutputModel>>> GetMoneyInEachCity();
         ValueTask<ActionResult<ShortProductOutputModel>> GetNoOrderedProducts();
         ValueTask<ActionResult<List<ProductInStoreOutputModel>>> GetProductsInWarehouseAndAbsentInMoscowAndSpb();

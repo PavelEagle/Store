@@ -3,8 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using WebStore.API.Models.OutputModels;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using WebStore.API.Models.InputModels;
-using WebStore.DB.Models.Reports;
 
 namespace WebStore.API.Controllers
 {
@@ -31,10 +29,10 @@ namespace WebStore.API.Controllers
             return Problem($"Transaction failed {result.ExMessage}", statusCode: 520);
         }
 
-        [HttpGet("info-about-orders-by-date")]
-        public async ValueTask<ActionResult<OrderInfoOutputModel>> GetInfoAboutOrdersByDate(DateOrderInputModel model)
+        [HttpGet("info-about-orders-by-date/{startDate}/{EndDate}")]
+        public async ValueTask<ActionResult<OrderInfoOutputModel>> GetInfoAboutOrdersByDate(string startDate, string EndDate)
         {
-            var result = await _reportRepository.GetInfoAboutOrdersByDate(_mapper.Map<DateOrder>(model));
+            var result = await _reportRepository.GetInfoAboutOrdersByDate(startDate, EndDate);
             if (result.IsOkay)
             {
                 return Ok(_mapper.Map<List<OrderInfoOutputModel>>(result.RequestData));

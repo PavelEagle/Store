@@ -10,7 +10,7 @@ namespace WebStore
     {
         ValueTask<RequestResult<List<ProductInStore>>> GetBestSellingProduct();
         ValueTask<RequestResult<List<CountProductInCategory>>> GetCategoryWithFiveAndMoreProduct();
-        ValueTask<RequestResult<List<OrderInfo>>> GetInfoAboutOrdersByDate(DateOrder date);
+        ValueTask<RequestResult<List<OrderInfo>>> GetInfoAboutOrdersByDate(string startDate, string endDate);
         ValueTask<RequestResult<List<MoneyInCity>>> GetMoneyInEachCity();
         ValueTask<RequestResult<List<Product>>> GetNoOrderedProducts();
         ValueTask<RequestResult<List<ProductInStore>>> GetProductsInWarehouseAndAbsentInMoscowAndSpb();

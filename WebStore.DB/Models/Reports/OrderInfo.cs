@@ -7,5 +7,7 @@ namespace WebStore.DB.Models
         public Product Product{ get; set; }
         public int Quantity { get; set; }
         public decimal Total { get; set; }
+        public int OrderId { get; set; }
+
     }
 }

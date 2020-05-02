@@ -1,5 +1,5 @@
 ﻿function GetMoneyInCity() {
-
+    HideCalendar();
     fetch('https://localhost:5001/api/report/money-in-city')
         .then((response) => response.json())
         .then((data) => {
@@ -18,6 +18,7 @@
 }
 
 function GetProductInStore(method) {
+    HideCalendar();
     let url;
     switch (method) {
         case "best-selling" : url = "https://localhost:5001/api/report/best-selling-product";
@@ -44,7 +45,7 @@ function GetProductInStore(method) {
 }
 
 function GetCategoryWithFiveAndMoreProducts() {
-
+    HideCalendar()
     fetch('https://localhost:5001/api/report/category-with-five-and-more-product')
         .then((response) => response.json())
         .then((data) => {
@@ -63,6 +64,7 @@ function GetCategoryWithFiveAndMoreProducts() {
 }
 
 function GetProduct(method) {
+    HideCalendar()
     let url;
     switch (method) {
         case "sold-out": url = "https://localhost:5001/api/report/sold-out-product";
@@ -89,21 +91,54 @@ function GetProduct(method) {
 
 async function GetOrdersByDate() {
 
-    fetch('https://localhost:5001/api/report/info-about-orders-by-date', { body: { StartDate: '01.01.2015', EndDate: '01.01.2018' } })
+    let startDateForUrl = FormateDate(this.document.getElementById("startDate").value);
+    let endDateForUrl = FormateDate(this.document.getElementById("endDate").value);
+    let url = 'https://localhost:5001/api/report/info-about-orders-by-date/' + startDateForUrl + '/' + endDateForUrl;
+
+    fetch(url)
         .then((response) => response.json())
         .then((data) => {
             CreateTable(data);
         });
 
     function CreateTable(reportModel) {
-        var strResult = "<table><th>Manufacturer</th><th>Model</th><th>Price</th>";
+        var strResult = "<table><th>City</th>" +
+                        "<th>Address</th>" +
+                        "<th>Manufacturer</th>" +
+                        "<th>Model</th>" +
+                        "<th>Price</th>" +
+                        "<th>Quantity</th>" +
+                        "<th>Total</th>" +
+                        "<th>OrderAddress</th>" +
+                        "<th>Date</th>";
         reportModel.forEach(x => {
-            strResult += "<tr><td>" + x.manufacturer + "</td><td> " + x.model + "</td><td>" + x.price + "</td><td>";
+            strResult += "<tr><td>" + x.city +
+                         "</td><td>" + x.address +
+                         "</td><td>" + x.manufacturer +
+                         "</td><td>" + x.model +
+                         "</td><td>" + x.price +
+                         "</td><td>" + x.quantity +
+                         "</td><td>" + x.total +
+                         "</td><td>" + x.orderAddress +
+                         "</td><td>" + x.date +
+                         "</td><td>";
         });
         strResult += "</table>";
 
         document.getElementById('DateTable').innerHTML = strResult;
     }
+
+    function FormateDate(date) {
+        return date.substring(8, 10) + date.substring(5, 7) + date.substring(0, 4);
+    }
+}
+function HideCalendar() {
+    document.getElementById('date').style.display = 'none';
+}
+
+function OpenCalendar() {
+    document.getElementById('DateTable').innerHTML = ' ';
+    document.getElementById('date').style.display = 'block';
 }
 
 window.onload = function () {
@@ -113,6 +148,8 @@ window.onload = function () {
     document.getElementById('categoryWithFiveAndMoreProducts').addEventListener("click", () => GetCategoryWithFiveAndMoreProducts());
     document.getElementById('soldOutProduct').addEventListener("click", () => GetProduct("sold-out"));
     document.getElementById('noOrderedProduct').addEventListener("click", () => GetProduct("no-ordered"));
+    document.getElementById('openCalendar').addEventListener("click", () => OpenCalendar()());
     document.getElementById('orderByDate').addEventListener("click", () => GetOrdersByDate());
+    HideCalendar();
 }
 

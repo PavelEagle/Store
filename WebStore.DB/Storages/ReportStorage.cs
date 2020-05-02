@@ -8,6 +8,8 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
+using System;
+using System.Globalization;
 
 namespace  WebStore.DB.Storages
 {
@@ -72,8 +74,11 @@ namespace  WebStore.DB.Storages
             }
         }
 
-        public async ValueTask<List<OrderInfo>> GetInfoAboutOrdersByDate(DateOrder date)
+        public async ValueTask<List<OrderInfo>> GetInfoAboutOrdersByDate(string startDate, string endDate)
         {
+
+            DateTime formatedStartDate = DateTime.ParseExact(startDate, "ddMMyyyy", CultureInfo.InvariantCulture);
+            DateTime formatedEndDate = DateTime.ParseExact(endDate, "ddMMyyyy", CultureInfo.InvariantCulture);
             try
             {
                 var result = await connection.QueryAsync<City, Store, Product, OrderInfo, OrderInfo>(
@@ -86,7 +91,11 @@ namespace  WebStore.DB.Storages
                         newOrderInfo.Product = product;
                         return newOrderInfo;
                     },
-                    new { date.StartDate, date.EndDate },
+                    new 
+                    { 
+                        startDate = formatedStartDate,
+                        endDate = formatedEndDate 
+                    },
                     commandType: CommandType.StoredProcedure,
                     splitOn: "Id");
                 return result.ToList();

@@ -77,12 +77,12 @@ namespace WebStore
             return result;
         }
 
-        public async ValueTask<RequestResult<List<OrderInfo>>> GetInfoAboutOrdersByDate(DateOrder date)
+        public async ValueTask<RequestResult<List<OrderInfo>>> GetInfoAboutOrdersByDate(string startDate, string endDate)
         {
             var result = new RequestResult<List<OrderInfo>>();
             try
             {
-                result.RequestData = await _reportStorage.GetInfoAboutOrdersByDate(date);
+                result.RequestData = await _reportStorage.GetInfoAboutOrdersByDate(startDate, endDate);
                 result.IsOkay = true;
             }
             catch (Exception ex)

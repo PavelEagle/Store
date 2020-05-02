@@ -9,7 +9,7 @@ namespace WebStore.DB.Storages
     {
         ValueTask<List<ProductInStore>> GetBestSellingProduct();
         ValueTask<List<CountProductInCategory>> GetCategoryWithFiveAndMoreProduct();
-        ValueTask<List<OrderInfo>> GetInfoAboutOrdersByDate(DateOrder date);
+        ValueTask<List<OrderInfo>> GetInfoAboutOrdersByDate(string startDate, string endDate);
         ValueTask<List<MoneyInCity>> GetMoneyInEachCity();
         ValueTask<List<Product>> GetNoOrderedProducts();
         ValueTask<List<ProductInStore>> GetProductsInWarehouseAndAbsentInMoscowAndSpb();
