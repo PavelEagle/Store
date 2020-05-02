@@ -1,6 +1,4 @@
-﻿
-
-namespace WebStore.API.Models.OutputModels
+﻿namespace WebStore.API.Models.OutputModels
 {
     public class MoneyInCityOutputModel 
     {
