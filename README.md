@@ -8,4 +8,4 @@ MVC Project WebStore
 - 2 контроллера: ReportController - для отчетов по интернет - магазину, ProductController - CRUD по товарам;
 - На View-слой добавлены все отчеты из ReportController и CRUD из ProductController
 
-Ссылка на базу данных - https://drive.google.com/open?id=1g-ggnpZSpQAKPNje-cy33bC_leGktHf3
+Ссылка на базу данных - https://drive.google.com/open?id=1M9IPnCHfr7oIWZa-WjrQc4kxChOpZLTl
