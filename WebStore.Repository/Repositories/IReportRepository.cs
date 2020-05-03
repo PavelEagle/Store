@@ -4,7 +4,7 @@ using WebStore.DB.Models;
 using WebStore.DB.Models.Reports;
 using WebStore.Repository;
 
-namespace WebStore
+namespace WebStore.Repository.Repositories
 {
     public interface IReportRepository
     {

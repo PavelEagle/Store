@@ -36,12 +36,19 @@
             });
 
         function CreateTable(reportModel) {
+            console.log(reportModel.length);
             var strResult = "<table><th>City</th>" +
                             "<th> Address</th>" +
                             "<th> Manufacturer</th>" +
                             "<th> Model</th>" +
-                "<th> Price</th>";
-            for (let i = 0; i < 100; i++) {
+                            "<th> Price</th>";
+            let length = 0;
+            if (reportModel.length > 100)
+                length = 100;
+            else
+                length = reportModel.length;
+
+            for (let i = 0; i < length; i++) {
                 strResult += "</tr><td> " + reportModel[i].city +
                     "</td><td>" + reportModel[i].address +
                     "</td><td>" + reportModel[i].manufacturer +

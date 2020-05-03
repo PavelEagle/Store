@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace WebStore
+namespace WebStore.Repository.Repositories
 {
     public class ReportRepository : IReportRepository
     {

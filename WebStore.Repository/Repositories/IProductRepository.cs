@@ -1,7 +1,7 @@
 ﻿using WebStore.DB.Models;
 using System.Threading.Tasks;
 
-namespace WebStore.Repository
+namespace WebStore.Repository.Repositories
 {
     public interface IProductRepository
     {

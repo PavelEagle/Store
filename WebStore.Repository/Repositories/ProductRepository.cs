@@ -3,7 +3,7 @@ using WebStore.DB.Storages;
 using System;
 using System.Threading.Tasks;
 
-namespace WebStore.Repository
+namespace WebStore.Repository.Repositories
 {
     public class ProductRepository : IProductRepository
     {

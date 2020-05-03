@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using WebStore.API.Models.InputModels;
 using WebStore.API.Models.OutputModels;
 using WebStore.DB.Models;
-using WebStore.Repository;
+using WebStore.Repository.Repositories;
 
 namespace WebStore.API.Controllers
 {

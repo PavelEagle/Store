@@ -8,6 +8,8 @@ namespace WebStore.DB.Models
         public int Quantity { get; set; }
         public decimal Total { get; set; }
         public int OrderId { get; set; }
+        public double CurrencyExchangeRate { get; set; }
+
 
     }
 }

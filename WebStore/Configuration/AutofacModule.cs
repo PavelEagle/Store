@@ -2,7 +2,7 @@
 using WebStore.API.Controllers;
 using WebStore.Controllers;
 using WebStore.DB.Storages;
-using WebStore.Repository;
+using WebStore.Repository.Repositories;
 
 namespace WebStore.API.Configuration
 {
@@ -15,6 +15,10 @@ namespace WebStore.API.Configuration
             builder.RegisterType<ProductRepository>().As<IProductRepository>();
             builder.RegisterType<ReportStorage>().As<IReportStorage>();
             builder.RegisterType<ReportRepository>().As<IReportRepository>();
+            builder.RegisterType<ReportController>().As<IReportController>();
+            builder.RegisterType<OrderStorage>().As<IOrderStorage>();
+            builder.RegisterType<OrderRepository>().As<IOrderRepository>();
+            builder.RegisterType<OrderController>().As<IOrderController>();
             builder.RegisterType<HomeController>().As<IHomeController>();
         }
     }
