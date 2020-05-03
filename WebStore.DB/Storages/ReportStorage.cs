@@ -25,20 +25,20 @@ namespace  WebStore.DB.Storages
         internal static class SpName
         {
             public const string GetMoneyInEachCity = "Report_GetMoneyInEachCity";
-            public const string GetBestSellingProduct = "Report_GetBestSellingProduct";
-            public const string GetProductsInWarehouseAndAbsentInMoscowAndSpb = "Report_GetProductsInWarehouseAndAbsentInMoscowAndSpb";
-            public const string GetCategoryWithFiveAndMoreProduct = "Report_GetCategoryWithFiveAndMoreProduct";
+            public const string GetBestSellingProducts = "Report_GetBestSellingProducts";
+            public const string GetProductsInWarehouseAndAbsentInMskAndSpb = "Report_GetProductsInWarehouseAndAbsentInMskAndSpb";
+            public const string GetCategoryWithFiveAndMoreProducts = "Report_GetCategoryWithFiveAndMoreProducts";
             public const string GetInfoAboutOrdersByDate = "Report_GetInfoAboutOrdersByDate";
             public const string GetNoOrderedProducts = "Report_GetNoOrderedProducts";
-            public const string GetSalesAmountInsideAndOutsideRF = "Report_GetSalesAmountInsideAndOutsideRF";
+            public const string GetSalesByWorldAndRF = "Report_GetSalesByWorldAndRF";
             public const string GetSoldOutProduct = "Report_GetSoldOutProduct";
         }
 
-        public async ValueTask<List<MoneyInCity>> GetMoneyInEachCity()
+        public async ValueTask<List<City>> GetMoneyInEachCity()
         {
             try
             {
-                var result = await connection.QueryAsync<MoneyInCity>(
+                var result = await connection.QueryAsync<City>(
                     SpName.GetMoneyInEachCity,
                     null,
                     commandType: CommandType.StoredProcedure);
@@ -50,12 +50,12 @@ namespace  WebStore.DB.Storages
             }
         }
 
-        public async ValueTask<List<ProductInStore>> GetBestSellingProduct()
+        public async ValueTask<List<ProductInStore>> GetBestSellingProducts()
         {
             try
             {
                 var result = await connection.QueryAsync<City, Store, ProductInStore, ProductInStore>(
-                    SpName.GetBestSellingProduct,
+                    SpName.GetBestSellingProducts,
                     (city, store, bsproduct) =>
                     {
                         ProductInStore newProduct = bsproduct;
@@ -106,12 +106,12 @@ namespace  WebStore.DB.Storages
             }
         }
 
-        public async ValueTask<List<ProductInStore>> GetProductsInWarehouseAndAbsentInMoscowAndSpb()
+        public async ValueTask<List<ProductInStore>> GetProductsInWarehouseAndAbsentInMskAndSpb()
         {
             try
             {
                 var result = await connection.QueryAsync<ProductInStore, City, Store, ProductInStore>(
-                    SpName.GetProductsInWarehouseAndAbsentInMoscowAndSpb,
+                    SpName.GetProductsInWarehouseAndAbsentInMskAndSpb,
                     (bsproduct, city, store) =>
                     {
                         ProductInStore newProduct = bsproduct;
@@ -130,12 +130,12 @@ namespace  WebStore.DB.Storages
             }
         }
 
-        public async ValueTask<List<CountProductInCategory>> GetCategoryWithFiveAndMoreProduct()
+        public async ValueTask<List<Category>> GetCategoryWithFiveAndMoreProducts()
         {
             try
             {
-                var result = await connection.QueryAsync<CountProductInCategory>(
-                    SpName.GetCategoryWithFiveAndMoreProduct,
+                var result = await connection.QueryAsync<Category>(
+                    SpName.GetCategoryWithFiveAndMoreProducts,
                     null,
                     commandType: CommandType.StoredProcedure);
                 return result.ToList();
@@ -171,6 +171,22 @@ namespace  WebStore.DB.Storages
                     null,
                     commandType: CommandType.StoredProcedure);
                 return result.ToList();
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async ValueTask<SalesByWorldAndRF> GetSalesByWorldAndRF()
+        {
+            try
+            {
+                var result = await connection.QueryAsync<SalesByWorldAndRF>(
+                    SpName.GetSalesByWorldAndRF,
+                    null,
+                    commandType: CommandType.StoredProcedure);
+                return result.FirstOrDefault();
             }
             catch (SqlException ex)
             {

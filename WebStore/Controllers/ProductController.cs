@@ -23,38 +23,36 @@ namespace WebStore.API.Controllers
         [HttpGet("{productId}")]
         public async ValueTask<ActionResult<ProductOutputModel>> GetProductById(int productId)
         {
-            if (productId < 1) return BadRequest("LeadId can not be less than one.");
+            if (productId < 1) return BadRequest("Enter currect productId");
             var result = await _productRepository.ProductGetById(productId);
             if (result.IsOkay)
             {
-                if (result.RequestData == null) { return NotFound("Lead not found"); }
+                if (result.RequestData == null) { return NotFound("Product not found"); }
                 return Ok(_mapper.Map<ProductOutputModel>(result.RequestData));
             }
-            return Problem($"Transaction failed {result.ExMessage}", statusCode: 520);
+            return Problem($"Something went wrong: {result.ExMessage}", statusCode: 520);
 
         }
 
         [HttpPost]
         public async ValueTask<ActionResult<ProductOutputModel>> InsertOrUpdateProduct(ProductInputModel productInputModel)
         {
-            if (productInputModel.Id < 1) return BadRequest("LeadId can not be less than one.");
+            if (productInputModel.Id < 1) return BadRequest("Enter currect productId");
             var result = await _productRepository.ProductInsertOrUpdate(_mapper.Map<Product>(productInputModel));
             if (result.IsOkay)
             {
-                if (result.RequestData == null) { return Problem($"Added lead not found", statusCode: 520); }
                 return Ok(_mapper.Map<ProductOutputModel>(result.RequestData));
             }
-            return Problem($"Transaction failed {result.ExMessage}", statusCode: 520);
+            return Problem($"Something went wrong: {result.ExMessage}", statusCode: 520);
         }
 
         [HttpDelete("{productId}")]
         public async ValueTask<ActionResult<string>> DeleteProduct(int productId)
         {
-            if (productId < 1) return BadRequest("ProductId can not be less than one.");
+            if (productId < 1) return BadRequest("Enter currect productId");
             var result = await _productRepository.ProductDelete(productId);
             if (result.IsOkay) 
             {
-                if (result.RequestData == null) { return Problem($"Added lead not found", statusCode: 520); }
                 return Ok(result.RequestData); 
             }
             return Problem($"Transaction failed {result.ExMessage}", statusCode: 520);

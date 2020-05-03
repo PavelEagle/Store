@@ -1,3 +1,4 @@
 {
-
+    "StoreApiUrl": "https://localhost:5015",
+    "DBConnectionString": "Data Source=.\\SQLEXPRESS;Initial Catalog=Store;Integrated Security=True"
 }

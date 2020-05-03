@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebStore.API.Models.InputModels;
 using WebStore.API.Models.OutputModels;
-using WebStore.DB.Models;
 using System.Threading.Tasks;
 
 namespace WebStore.API.Controllers

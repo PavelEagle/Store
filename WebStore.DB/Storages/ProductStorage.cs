@@ -11,7 +11,8 @@ namespace WebStore.DB.Storages
 {
     public class ProductStorage : Transaction, IProductStorage
     {
-        private readonly IDbConnection connection;
+        private IDbConnection connection;
+        private IDbTransaction transaction;
 
         public ProductStorage(IOptions<StorageOptions> storageOptions)
         {
@@ -41,7 +42,7 @@ namespace WebStore.DB.Storages
                         return newProd;
                     },
                     param: new { id },
-                    _dbTransaction,
+                    transaction: transaction,
                     commandType: CommandType.StoredProcedure,
                     splitOn: "Id");
                 return result.FirstOrDefault();
@@ -70,6 +71,7 @@ namespace WebStore.DB.Storages
                     var result = await connection.QueryAsync<long>(
                         SpName.ProductInsertOrUpdate,
                         ProductParams,
+                        transaction: transaction,
                         commandType: CommandType.StoredProcedure);
                         product.Id = (int)result.FirstOrDefault();
                 }
@@ -96,6 +98,7 @@ namespace WebStore.DB.Storages
                 await connection.QueryAsync<long>(
                     SpName.ProductDeleteById,
                     new { id },
+                    transaction: transaction,
                     commandType: CommandType.StoredProcedure
                 );
             }
@@ -103,6 +106,23 @@ namespace WebStore.DB.Storages
             {
                 throw ex;
             }
+        }
+        public void TransactionStart()
+        {
+            connection.Open();
+            transaction = connection.BeginTransaction();
+        }
+
+        public void TransactionCommit()
+        {
+            transaction?.Commit();
+            connection?.Close();
+        }
+
+        public void TransactioRollBack()
+        {
+            transaction?.Rollback();
+            connection?.Close();
         }
     }
 }

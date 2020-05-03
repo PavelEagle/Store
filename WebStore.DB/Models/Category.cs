@@ -2,5 +2,6 @@
 {
     public class Category : Dictionary
     {
+        public int CountProduct { get; set; }
     }
 }

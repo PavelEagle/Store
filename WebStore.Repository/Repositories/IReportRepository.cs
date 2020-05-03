@@ -8,12 +8,13 @@ namespace WebStore
 {
     public interface IReportRepository
     {
-        ValueTask<RequestResult<List<ProductInStore>>> GetBestSellingProduct();
-        ValueTask<RequestResult<List<CountProductInCategory>>> GetCategoryWithFiveAndMoreProduct();
+        ValueTask<RequestResult<List<ProductInStore>>> GetBestSellingProducts();
+        ValueTask<RequestResult<List<Category>>> GetCategoryWithFiveAndMoreProducts();
         ValueTask<RequestResult<List<OrderInfo>>> GetInfoAboutOrdersByDate(string startDate, string endDate);
-        ValueTask<RequestResult<List<MoneyInCity>>> GetMoneyInEachCity();
+        ValueTask<RequestResult<List<City>>> GetMoneyInEachCity();
         ValueTask<RequestResult<List<Product>>> GetNoOrderedProducts();
-        ValueTask<RequestResult<List<ProductInStore>>> GetProductsInWarehouseAndAbsentInMoscowAndSpb();
+        ValueTask<RequestResult<List<ProductInStore>>> GetProductsInWarehouseAndAbsentInMskAndSpb();
         ValueTask<RequestResult<List<Product>>> GetSoldOutProduct();
+        ValueTask<RequestResult<SalesByWorldAndRF>> GetSalesByWorldAndRF();
     }
 }

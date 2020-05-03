@@ -17,6 +17,8 @@ namespace WebStore
             var builder = new ConfigurationBuilder();
 
             builder.AddJsonFile("config.json", false, true);
+            if (env.IsProduction())
+                builder.AddJsonFile("config.development.json", false, true);
 
             Configuration = builder.Build();
         }

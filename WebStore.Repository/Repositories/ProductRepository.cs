@@ -29,17 +29,31 @@ namespace WebStore.Repository
             return result;
         }
 
-        public async ValueTask<RequestResult<string>> ProductDelete(int id)
+        public async ValueTask<RequestResult<string>> ProductDelete(int productId)
         {
             var result = new RequestResult<string>();
             try
             {
-                await _productStorage.ProductDeleteById(id);
-                result.RequestData = $"Model with id {id} was deleted";
-                result.IsOkay = true;
+                _productStorage.TransactionStart();
+                var getProductData = await _productStorage.ProductGetById(productId);
+                await _productStorage.ProductDeleteById(productId);
+                if (getProductData == null)
+                {
+                    result.IsOkay = false;
+                }
+                else
+                {
+                    result.RequestData = $"Model with id {productId} was deleted";
+                    result.IsOkay = true;
+                }
+
+                _productStorage.TransactionCommit();
+
+
             }
             catch (Exception ex)
             {
+                _productStorage.TransactioRollBack();
                 result.ExMessage = ex.Message;
             }
             return result;
@@ -50,14 +64,14 @@ namespace WebStore.Repository
             var result = new RequestResult<Product>();
             try
             {
-                //_productStorage.TransactionStart();
+                _productStorage.TransactionStart();
                 result.RequestData = await _productStorage.ProductInsertOrUpdate(dataModel);
-                //_productStorage.TransactionCommit();
+                _productStorage.TransactionCommit();
                 result.IsOkay = true;
             }
             catch (Exception ex)
             {
-                //_productStorage.TransactioRollBack();
+                _productStorage.TransactioRollBack();
                 result.ExMessage = ex.Message;
             }
             return result;

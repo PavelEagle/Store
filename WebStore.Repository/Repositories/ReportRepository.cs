@@ -17,9 +17,9 @@ namespace WebStore
             _reportStorage = reportStorage;
         }
 
-        public async ValueTask<RequestResult<List<MoneyInCity>>> GetMoneyInEachCity()
+        public async ValueTask<RequestResult<List<City>>> GetMoneyInEachCity()
         {
-            var result = new RequestResult<List<MoneyInCity>>();
+            var result = new RequestResult<List<City>>();
             try
             {
                 result.RequestData = await _reportStorage.GetMoneyInEachCity();
@@ -32,12 +32,12 @@ namespace WebStore
             return result;
         }
 
-        public async ValueTask<RequestResult<List<ProductInStore>>> GetBestSellingProduct()
+        public async ValueTask<RequestResult<List<ProductInStore>>> GetBestSellingProducts()
         {
             var result = new RequestResult<List<ProductInStore>>();
             try
             {
-                result.RequestData = await _reportStorage.GetBestSellingProduct();
+                result.RequestData = await _reportStorage.GetBestSellingProducts();
                 result.IsOkay = true;
             }
             catch (Exception ex)
@@ -47,12 +47,12 @@ namespace WebStore
             return result;
         }
 
-        public async ValueTask<RequestResult<List<ProductInStore>>> GetProductsInWarehouseAndAbsentInMoscowAndSpb()
+        public async ValueTask<RequestResult<List<ProductInStore>>> GetProductsInWarehouseAndAbsentInMskAndSpb()
         {
             var result = new RequestResult<List<ProductInStore>>();
             try
             {
-                result.RequestData = await _reportStorage.GetProductsInWarehouseAndAbsentInMoscowAndSpb();
+                result.RequestData = await _reportStorage.GetProductsInWarehouseAndAbsentInMskAndSpb();
                 result.IsOkay = true;
             }
             catch (Exception ex)
@@ -62,12 +62,12 @@ namespace WebStore
             return result;
         }
 
-        public async ValueTask<RequestResult<List<CountProductInCategory>>> GetCategoryWithFiveAndMoreProduct()
+        public async ValueTask<RequestResult<List<Category>>> GetCategoryWithFiveAndMoreProducts()
         {
-            var result = new RequestResult<List<CountProductInCategory>>();
+            var result = new RequestResult<List<Category>>();
             try
             {
-                result.RequestData = await _reportStorage.GetCategoryWithFiveAndMoreProduct();
+                result.RequestData = await _reportStorage.GetCategoryWithFiveAndMoreProducts();
                 result.IsOkay = true;
             }
             catch (Exception ex)
@@ -113,6 +113,21 @@ namespace WebStore
             try
             {
                 result.RequestData = await _reportStorage.GetSoldOutProduct();
+                result.IsOkay = true;
+            }
+            catch (Exception ex)
+            {
+                result.ExMessage = ex.Message;
+            }
+            return result;
+        }
+
+        public async ValueTask<RequestResult<SalesByWorldAndRF>> GetSalesByWorldAndRF()
+        {
+            var result = new RequestResult<SalesByWorldAndRF>();
+            try
+            {
+                result.RequestData = await _reportStorage.GetSalesByWorldAndRF();
                 result.IsOkay = true;
             }
             catch (Exception ex)

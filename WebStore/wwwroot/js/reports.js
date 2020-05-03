@@ -24,9 +24,9 @@
         HideCalendar();
         let url;
         switch (method) {
-            case "best-selling": url = "https://localhost:5001/api/report/best-selling-product";
+            case "best-selling": url = "https://localhost:5001/api/report/best-selling-products";
                 break;
-            case "in-warehouse-absent-msc-spb": url = "https://localhost:5001/api/report/products-in-warehouse-and-absent-in-moscow-and-spb";
+            case "in-warehouse-absent-msc-spb": url = "https://localhost:5001/api/report/products-in-warehouse-and-absent-in-msk-and-spb";
                 break;
         }
         fetch(url)
@@ -40,24 +40,24 @@
                             "<th> Address</th>" +
                             "<th> Manufacturer</th>" +
                             "<th> Model</th>" +
-                            "<th> Price</th>";
-            reportModel.forEach(x => {
-                strResult +="</tr><td> " + x.city + 
-                            "</td><td>" + x.address + 
-                            "</td><td>" + x.manufacturer + 
-                            "</td><td>" + x.model + 
-                            "</td><td>" + x.price +
-                            "</td>";
-            });
+                "<th> Price</th>";
+            for (let i = 0; i < 100; i++) {
+                strResult += "</tr><td> " + reportModel[i].city +
+                    "</td><td>" + reportModel[i].address +
+                    "</td><td>" + reportModel[i].manufacturer +
+                    "</td><td>" + reportModel[i].model +
+                    "</td><td>" + reportModel[i].price +
+                    "</td>";
+            }
             strResult += "</table>";
 
             document.getElementById('DateTable').innerHTML = strResult;
         }
     }
 
-    function GetCategoryWithFiveAndMoreProducts() {
+    function GetCategoryWithFiveAndMoreProductss() {
         HideCalendar()
-        fetch('https://localhost:5001/api/report/category-with-five-and-more-product')
+        fetch('https://localhost:5001/api/report/category-with-five-and-more-products')
             .then((response) => response.json())
             .then((data) => {
                 CreateTable(data);
@@ -81,7 +81,7 @@
         HideCalendar()
         let url;
         switch (method) {
-            case "sold-out": url = "https://localhost:5001/api/report/sold-out-product";
+            case "sold-out": url = "https://localhost:5001/api/report/sold-out-products";
                 break;
             case "no-ordered": url = "https://localhost:5001/api/report/no-ordered-products";
                 break;
@@ -96,12 +96,12 @@
             var strResult = "<table><th>Manufacturer</th>" +
                             "<th> Model</th>" +
                             "<th> Model</th>";
-            reportModel.forEach(x => {
-                strResult += "<tr><td>" + x.manufacturer +
-                             "</td><td> " + x.model +
-                             "</td><td>" + x.price +
-                             "</td>";
-            });
+            for (let i = 0; i < 100; i++) {
+                strResult += "<tr><td>" + reportModel[i].manufacturer +
+                    "</td><td> " + reportModel[i].model +
+                    "</td><td>" + reportModel[i].price +
+                    "</td>";
+                }
             strResult += "</table>";
 
             document.getElementById('DateTable').innerHTML = strResult;
@@ -131,19 +131,19 @@
                             "<th>Total</th>" +
                             "<th>OrderAddress</th>" +
                             "<th>Date</th>";
-            reportModel.forEach(x => {
-                strResult += "<tr><td>" + x.orderId + 
-                            "</td><td>" + x.city +
-                            "</td><td>" + x.address +
-                            "</td><td>" + x.manufacturer +
-                            "</td><td>" + x.model +
-                            "</td><td>" + x.price +
-                            "</td><td>" + x.quantity +
-                            "</td><td>" + x.total +
-                            "</td><td>" + x.orderAddress +
-                            "</td><td>" + x.date +
-                            "</td>";
-            });
+            for (let i = 0; i < 100; i++) {
+                strResult += "<tr><td>" + reportModel[i].orderId +
+                             "</td><td>" + reportModel[i].city +
+                             "</td><td>" + reportModel[i].address +
+                             "</td><td>" + reportModel[i].manufacturer +
+                             "</td><td>" + reportModel[i].model +
+                             "</td><td>" + reportModel[i].price +
+                             "</td><td>" + reportModel[i].quantity +
+                             "</td><td>" + reportModel[i].total +
+                             "</td><td>" + reportModel[i].orderAddress +
+                             "</td><td>" + reportModel[i].date +
+                             "</td>";
+                }
             strResult += "</table>";
 
             document.getElementById('DateTable').innerHTML = strResult;
@@ -153,6 +153,27 @@
             return date.substring(8, 10) + date.substring(5, 7) + date.substring(0, 4);
         }
     }
+
+    function GetSalesByWorldAndRF() {
+        HideCalendar()
+        fetch('https://localhost:5001/api/report/sales-by-world-and-rf')
+            .then((response) => response.json())
+            .then((data) => {
+                CreateTable(data);
+            });
+
+        function CreateTable(reportModel) {
+            var strResult = "<table><th>SalesInRF</th>" +
+                "<th>SalesInTheWorld</th> ";
+            strResult += "<tr><td>" + Math.round(reportModel.salesInRF) +
+                "</td><td> " + Math.round(reportModel.salesInTheWorld)+
+                "</td></table>";
+
+            document.getElementById('DateTable').innerHTML = strResult;
+        }
+    }
+
+
     function HideCalendar() {
         document.getElementById('date').style.display = 'none';
     }
@@ -166,11 +187,12 @@
         document.getElementById('moneyInCity').addEventListener("click", () => GetMoneyInCity());
         document.getElementById('bestSellingProduct').addEventListener("click", () => GetProductInStore("best-selling"));
         document.getElementById('inWareHouseAbsentMscSpb').addEventListener("click", () => GetProductInStore("in-warehouse-absent-msc-spb"));
-        document.getElementById('categoryWithFiveAndMoreProducts').addEventListener("click", () => GetCategoryWithFiveAndMoreProducts());
+        document.getElementById('categoryWithFiveAndMoreProducts').addEventListener("click", () => GetCategoryWithFiveAndMoreProductss());
         document.getElementById('soldOutProduct').addEventListener("click", () => GetProduct("sold-out"));
         document.getElementById('noOrderedProduct').addEventListener("click", () => GetProduct("no-ordered"));
         document.getElementById('showCalendar').addEventListener("click", () => ShowCalendar());
         document.getElementById('orderByDate').addEventListener("click", () => GetOrdersByDate());
+        document.getElementById('salesByWorldAndRF').addEventListener("click", () => GetSalesByWorldAndRF());
         HideCalendar();
     }
 }

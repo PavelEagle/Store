@@ -7,13 +7,13 @@ namespace WebStore.API.Controllers
 {
     public interface IReportController
     {
-        ValueTask<ActionResult<ProductInStoreOutputModel>> GetBestSellingProduct();
-        ValueTask<ActionResult<CountProductInCategoryOutputModel>> GetCategoryWithFiveAndMoreProduct();
+        ValueTask<ActionResult<ProductInStoreOutputModel>> GetBestSellingProducts();
+        ValueTask<ActionResult<CountProductInCategoryOutputModel>> GetCategoryWithFiveAndMoreProducts();
         ValueTask<ActionResult<OrderInfoOutputModel>> GetInfoAboutOrdersByDate(string startDate, string EndDate);
         ValueTask<ActionResult<List<MoneyInCityOutputModel>>> GetMoneyInEachCity();
         ValueTask<ActionResult<ShortProductOutputModel>> GetNoOrderedProducts();
-        ValueTask<ActionResult<List<ProductInStoreOutputModel>>> GetProductsInWarehouseAndAbsentInMoscowAndSpb();
-        ValueTask<ActionResult<object>> GetSalesAmountInsideAndOutsideRF();
+        ValueTask<ActionResult<List<ProductInStoreOutputModel>>> GetProductsInWarehouseAndAbsentInMskAndSpb();
+        ValueTask<ActionResult<SalesByWorldAndRFOutputModel>> GetSalesByWorldAndRF();
         ValueTask<ActionResult<ShortProductOutputModel>> GetSoldOutProduct();
     }
 }

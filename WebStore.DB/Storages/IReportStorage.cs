@@ -7,12 +7,13 @@ namespace WebStore.DB.Storages
 {
     public interface IReportStorage
     {
-        ValueTask<List<ProductInStore>> GetBestSellingProduct();
-        ValueTask<List<CountProductInCategory>> GetCategoryWithFiveAndMoreProduct();
+        ValueTask<List<ProductInStore>> GetBestSellingProducts();
+        ValueTask<List<Category>> GetCategoryWithFiveAndMoreProducts();
         ValueTask<List<OrderInfo>> GetInfoAboutOrdersByDate(string startDate, string endDate);
-        ValueTask<List<MoneyInCity>> GetMoneyInEachCity();
+        ValueTask<List<City>> GetMoneyInEachCity();
         ValueTask<List<Product>> GetNoOrderedProducts();
-        ValueTask<List<ProductInStore>> GetProductsInWarehouseAndAbsentInMoscowAndSpb();
+        ValueTask<List<ProductInStore>> GetProductsInWarehouseAndAbsentInMskAndSpb();
         ValueTask<List<Product>> GetSoldOutProduct();
+        ValueTask<SalesByWorldAndRF> GetSalesByWorldAndRF();
     }
 }

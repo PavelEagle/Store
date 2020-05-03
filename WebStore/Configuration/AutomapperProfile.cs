@@ -29,8 +29,12 @@ namespace WebStore.API.Configuration
                 .ForMember(dest => dest.Model, opt => opt.MapFrom(src => src.Product.Model))
                 .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Product.Price))
                 .ForMember(dest => dest.Date, opt => opt.MapFrom(src => src.Date.ToString("dd/MM/yyyy")));
-            CreateMap<MoneyInCity, MoneyInCityOutputModel>();
-            CreateMap<CountProductInCategory, CountProductInCategoryOutputModel>();
+            CreateMap<City, MoneyInCityOutputModel>()
+                .ForMember(dest => dest.City, opt => opt.MapFrom(src => src.Name))
+                .ForMember(dest => dest.Total, opt => opt.MapFrom(src => src.TotalMoney));
+            CreateMap<Category, CountProductInCategoryOutputModel>()
+                 .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.Name));
+            CreateMap<SalesByWorldAndRF, SalesByWorldAndRFOutputModel> ();
         }
     }
 }
