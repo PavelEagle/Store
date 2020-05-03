@@ -10,15 +10,18 @@ namespace WebStore.API.Configuration
     {
         public AutomapperProfile()
         {
+            // Mapping for product CRUD
             CreateMap<Product, ProductOutputModel>()
                 .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.Subcategory.Category.Name))
                 .ForMember(dest => dest.Subcategory, opt => opt.MapFrom(src => src.Subcategory.Name));
+            CreateMap<ProductInputModel, Product>()
+               .ForMember(dest => dest.Subcategory, opt => opt.MapFrom(src => new Subcategory { Id = src.SubcategoryId }));
 
-            CreateMap<MoneyInCity, MoneyInCityOutputModel>();
+            // Mapping for reports
+            CreateMap<Product, ShortProductOutputModel>();
             CreateMap<ProductInStore, ProductInStoreOutputModel>()
                 .ForMember(dest => dest.City, opt => opt.MapFrom(src => src.Store.City.Name))
                 .ForMember(dest => dest.Address, opt => opt.MapFrom(src => src.Store.Address));
-
             CreateMap<OrderInfo, OrderInfoOutputModel>()
                 .ForMember(dest => dest.City, opt => opt.MapFrom(src => src.Store.City.Name))
                 .ForMember(dest => dest.Address, opt => opt.MapFrom(src => src.Store.Address))
@@ -26,14 +29,8 @@ namespace WebStore.API.Configuration
                 .ForMember(dest => dest.Model, opt => opt.MapFrom(src => src.Product.Model))
                 .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Product.Price))
                 .ForMember(dest => dest.Date, opt => opt.MapFrom(src => src.Date.ToString("dd/MM/yyyy")));
-
+            CreateMap<MoneyInCity, MoneyInCityOutputModel>();
             CreateMap<CountProductInCategory, CountProductInCategoryOutputModel>();
-
-            CreateMap<Product, ShortProductOutputModel>();
-
-            CreateMap<ProductInputModel, Product>()
-                .ForMember(dest => dest.Subcategory, opt => opt.MapFrom(src => new Subcategory { Id = src.SubcategoryId }));
-
         }
     }
 }

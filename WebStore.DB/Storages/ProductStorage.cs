@@ -15,7 +15,7 @@ namespace WebStore.DB.Storages
 
         public ProductStorage(IOptions<StorageOptions> storageOptions)
         {
-            this.connection = new SqlConnection(storageOptions.Value.DBConnectionString);
+            connection = new SqlConnection(storageOptions.Value.DBConnectionString);
         }
 
         internal static class SpName
@@ -23,14 +23,13 @@ namespace WebStore.DB.Storages
             public const string ProductGetById = "Product_GetById";
             public const string ProductDeleteById = "Product_DeleteById";
             public const string ProductInsertOrUpdate = "Product_InsertOrUpdate";
-
         }
 
         public async ValueTask<Product> ProductGetById(int id)
         {
             try
             {
-                var result = await connection.QueryAsync<Product, Subcategory, Dictionary, Product>(
+                var result = await connection.QueryAsync<Product, Subcategory, Category, Product>(
                     SpName.ProductGetById,
                     (product, subcategory, category) =>
                     {
@@ -90,7 +89,6 @@ namespace WebStore.DB.Storages
             }
         }
 
-
         public async ValueTask ProductDeleteById(int id)
         {
             try
@@ -105,14 +103,6 @@ namespace WebStore.DB.Storages
             {
                 throw ex;
             }
-        }
-
-
-
-
-        public void Transactionstart(IDbTransaction dbTransaction)
-        {
-            _dbTransaction = dbTransaction;
         }
     }
 }

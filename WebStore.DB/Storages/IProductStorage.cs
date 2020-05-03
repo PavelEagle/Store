@@ -9,6 +9,5 @@ namespace WebStore.DB.Storages
         ValueTask<Product> ProductGetById(int id);
         ValueTask<Product> ProductInsertOrUpdate(Product product);
         ValueTask ProductDeleteById(int id);
-        void Transactionstart(IDbTransaction dbTransaction);
     }
 }

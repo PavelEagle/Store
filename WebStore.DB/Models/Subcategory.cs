@@ -2,6 +2,6 @@
 {
     public class Subcategory : Dictionary
     {
-        public Dictionary Category { get; set; }
+        public Category Category { get; set; }
     }
 }
