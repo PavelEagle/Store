@@ -47,13 +47,18 @@ namespace WebStore.API.Controllers
             return Problem($"Transaction failed {result.ExMessage}", statusCode: 520);
         }
 
-        [HttpDelete("{orderId}")]
-        public async ValueTask<ActionResult<Order>> DeleteProduct(int productId)
+        [HttpDelete("{productId}")]
+        public async ValueTask<ActionResult<string>> DeleteProduct(int productId)
         {
             if (productId < 1) return BadRequest("ProductId can not be less than one.");
             var result = await _productRepository.ProductDelete(productId);
-            if (result.IsOkay) { return Ok(); }
+            if (result.IsOkay) 
+            {
+                if (result.RequestData == null) { return Problem($"Added lead not found", statusCode: 520); }
+                return Ok(result.RequestData); 
+            }
             return Problem($"Transaction failed {result.ExMessage}", statusCode: 520);
+
         }
     }
 }

@@ -29,19 +29,17 @@ namespace WebStore.Repository
             return result;
         }
 
-        public async ValueTask<RequestResult<Product>> ProductDelete(int id)
+        public async ValueTask<RequestResult<string>> ProductDelete(int id)
         {
-            var result = new RequestResult<Product>();
+            var result = new RequestResult<string>();
             try
             {
-                //_productStorage.TransactionStart();
                 await _productStorage.ProductDeleteById(id);
-                //_leadStorage.TransactionCommit();
+                result.RequestData = $"Model with id {id} was deleted";
                 result.IsOkay = true;
             }
             catch (Exception ex)
             {
-                //_productStorage.TransactioRollBack();
                 result.ExMessage = ex.Message;
             }
             return result;

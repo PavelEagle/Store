@@ -3,4 +3,34 @@
 }
 <h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+<input id="productGetDelMethodBtn" value="Get/Delete" type="button">
+<input id="productPostMethodBtn" value="Post" type="button">
+<input id="productUpdateMethodBtn" value="Update" type="button">
+
+<div id="productDate">
+    <div id="productGetByIdData">
+        <input id="productId" type="text" value="55" name="productId">
+        <input id="getByIdBtn" value="Get" type="button">
+        <input id="deleteByIdBtn" value="Delete" type="button">
+    </div>
+    <div id="productPostData">
+        <p>Manufacturer: <input id="postManufacturer" type="text" name="Manufacturer"></p>
+        <p>Model: <input id="postModel" type="text" name="Model"></p>
+        <p>Price: <input id="postPrice" type="text" name="Price"></p>
+        <p>Subcategory: <input id="postSubcategory" type="text" name="Subcategory"></p>
+        <input id="postBtn" value="Post" type="button">
+    </div>
+    <div id="productUpdateData">
+        <p>Id: <input id="updateId" type="text" name="Id"></p>
+        <p>Manufacturer: <input id="updateManufacturer" type="text" name="Manufacturer"></p>
+        <p>Model: <input id="updateModel" type="text" name="Model"></p>
+        <p>Price: <input id="updatePrice" type="text" name="Price"></p>
+        <p>Subcategory: <input id="updateSubcategory" type="text" name="Subcategory"></p>
+        <input id="updateBtn" value="Update" type="button">
+    </div>
+</div>
+
+<div id="productDateTable"></div>
+
+<script src="~/js/product.js"></script>
+

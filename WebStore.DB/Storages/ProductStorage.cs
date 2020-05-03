@@ -57,19 +57,31 @@ namespace WebStore.DB.Storages
         {
             try
             {
-                DynamicParameters leadModelParams = new DynamicParameters(new
+                DynamicParameters ProductParams = new DynamicParameters(new
                 {
                     product.Id,
                     product.Manufacturer,
                     product.Model,
                     product.Price,
-                    product.Subcategory
+                    subcategoryId = product.Subcategory.Id
                 });
-                var result = await connection.QueryAsync<long>(
-                    SpName.ProductInsertOrUpdate,
-                    leadModelParams,
-                    commandType: CommandType.StoredProcedure);
-                product.Id = (int)result.FirstOrDefault();
+
+                if (product.Id == null)
+                {
+                    var result = await connection.QueryAsync<long>(
+                        SpName.ProductInsertOrUpdate,
+                        ProductParams,
+                        commandType: CommandType.StoredProcedure);
+                        product.Id = (int)result.FirstOrDefault();
+                }
+                else
+                {
+                    await connection.QueryAsync(
+                        SpName.ProductInsertOrUpdate,
+                        ProductParams,
+                        commandType: CommandType.StoredProcedure);
+                }
+               
                 return await ProductGetById((int)product.Id);
             }
             catch (SqlException ex)

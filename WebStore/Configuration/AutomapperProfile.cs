@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using WebStore.API.Models.InputModels;
 using WebStore.API.Models.OutputModels;
 using WebStore.DB.Models;
 using WebStore.DB.Models.Reports;
@@ -29,6 +30,9 @@ namespace WebStore.API.Configuration
             CreateMap<CountProductInCategory, CountProductInCategoryOutputModel>();
 
             CreateMap<Product, ShortProductOutputModel>();
+
+            CreateMap<ProductInputModel, Product>()
+                .ForMember(dest => dest.Subcategory, opt => opt.MapFrom(src => new Subcategory { Id = src.SubcategoryId }));
 
         }
     }
