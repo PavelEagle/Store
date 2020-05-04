@@ -9,12 +9,9 @@ using WebStore.DB.Models;
 
 namespace WebStore.DB.Storages
 {
-    public class OrderStorage : IOrderStorage
+    public class OrderStorage : BaseStorage, IOrderStorage
     {
-        private IDbConnection connection;
-        private IDbTransaction transaction;
-
-        public OrderStorage(IOptions<StorageOptions> storageOptions)
+        public OrderStorage(IOptions<StorageOptions> storageOptions) : base(storageOptions)
         {
             connection = new SqlConnection(storageOptions.Value.DBConnectionString);
         }
@@ -76,23 +73,6 @@ namespace WebStore.DB.Storages
             {
                 throw ex;
             }
-        }
-        public void TransactionStart()
-        {
-            connection.Open();
-            transaction = connection.BeginTransaction();
-        }
-
-        public void TransactionCommit()
-        {
-            transaction?.Commit();
-            connection?.Close();
-        }
-
-        public void TransactioRollBack()
-        {
-            transaction?.Rollback();
-            connection?.Close();
         }
     }
 

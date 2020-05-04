@@ -19,6 +19,7 @@ namespace WebStore.API.Configuration
             builder.RegisterType<OrderStorage>().As<IOrderStorage>();
             builder.RegisterType<OrderRepository>().As<IOrderRepository>();
             builder.RegisterType<OrderController>().As<IOrderController>();
+            builder.RegisterType<BaseStorage>().As<IBaseStorage>();
             builder.RegisterType<HomeController>().As<IHomeController>();
         }
     }

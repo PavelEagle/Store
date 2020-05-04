@@ -24,13 +24,13 @@ namespace WebStore.Repository.Repositories
 
                 decimal currencyExchangeRate;
                 string valute;
-                switch (result.RequestData.Store.City.Name)
+                switch (result.RequestData.Store.City.Id)
                 {
-                    case "Минск":
+                    case (int)CurrencyEnum.Minsk:
                         valute = "BYN";
                         currencyExchangeRate = await GetCurrencyExchangeRate.GetCurrency(valute);
                         break;
-                    case "Киев":
+                    case (int)CurrencyEnum.Kiev:
                         valute = "UAH";
                         currencyExchangeRate = await GetCurrencyExchangeRate.GetCurrency(valute);
                         break;

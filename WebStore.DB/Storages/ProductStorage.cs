@@ -9,12 +9,9 @@ using System.Threading.Tasks;
 
 namespace WebStore.DB.Storages
 {
-    public class ProductStorage : Transaction, IProductStorage
+    public class ProductStorage : BaseStorage, IProductStorage
     {
-        private IDbConnection connection;
-        private IDbTransaction transaction;
-
-        public ProductStorage(IOptions<StorageOptions> storageOptions)
+        public ProductStorage(IOptions<StorageOptions> storageOptions) : base(storageOptions)
         {
             connection = new SqlConnection(storageOptions.Value.DBConnectionString);
         }
@@ -73,7 +70,7 @@ namespace WebStore.DB.Storages
                         ProductParams,
                         transaction: transaction,
                         commandType: CommandType.StoredProcedure);
-                        product.Id = (int)result.FirstOrDefault();
+                    product.Id = (int)result.FirstOrDefault();
                 }
                 else
                 {
@@ -82,7 +79,7 @@ namespace WebStore.DB.Storages
                         ProductParams,
                         commandType: CommandType.StoredProcedure);
                 }
-               
+
                 return await ProductGetById((int)product.Id);
             }
             catch (SqlException ex)
@@ -106,23 +103,6 @@ namespace WebStore.DB.Storages
             {
                 throw ex;
             }
-        }
-        public void TransactionStart()
-        {
-            connection.Open();
-            transaction = connection.BeginTransaction();
-        }
-
-        public void TransactionCommit()
-        {
-            transaction?.Commit();
-            connection?.Close();
-        }
-
-        public void TransactioRollBack()
-        {
-            transaction?.Rollback();
-            connection?.Close();
         }
     }
 }

@@ -6,6 +6,7 @@ create proc [dbo].[Order_GetById]
 as
 begin
 	 SELECT
+		city.Id,
 		city.[Name],
 		st.id as Id,
 		st.Address,
@@ -25,6 +26,6 @@ begin
   inner join dbo.Store st on o.StoreId = st.Id 
   inner join dbo.CityDictionary city on st.CityId = city.Id 
   WHERE o.Id = @OrderId
-  GROUP BY o.[Date], city.[Name], st.id, st.Address,prod.Id, prod.Manufacturer, prod.Model, prod.Price, o.Id , po.OrderId, o.OrderAddress, Quantity
+  GROUP BY o.[Date], city.Id, city.[Name], st.id, st.Address, prod.Id, prod.Manufacturer, prod.Model, prod.Price, o.Id , po.OrderId, o.OrderAddress, Quantity
   ORDER BY po.OrderId, o.[Date], city.Name 
 end

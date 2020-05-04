@@ -41,13 +41,10 @@
                             "<th> Address</th>" +
                             "<th> Manufacturer</th>" +
                             "<th> Model</th>" +
-                            "<th> Price</th>";
-            let length = 0;
-            if (reportModel.length > 100)
-                length = 100;
-            else
-                length = reportModel.length;
+                             "<th> Price</th>";
 
+            let length = reportModel.length > 100 ? 100 : reportModel.length;
+                
             for (let i = 0; i < length; i++) {
                 strResult += "</tr><td> " + reportModel[i].city +
                     "</td><td>" + reportModel[i].address +
@@ -103,7 +100,10 @@
             var strResult = "<table><th>Manufacturer</th>" +
                             "<th> Model</th>" +
                             "<th> Model</th>";
-            for (let i = 0; i < 100; i++) {
+
+            let length = reportModel.length > 100 ? 100 : reportModel.length;
+
+            for (let i = 0; i < length; i++) {
                 strResult += "<tr><td>" + reportModel[i].manufacturer +
                     "</td><td> " + reportModel[i].model +
                     "</td><td>" + reportModel[i].price +
@@ -138,7 +138,10 @@
                             "<th>Total</th>" +
                             "<th>OrderAddress</th>" +
                             "<th>Date</th>";
-            for (let i = 0; i < 100; i++) {
+
+            let length = reportModel.length > 100 ? 100 : reportModel.length;
+
+            for (let i = 0; i < length; i++) {
                 strResult += "<tr><td>" + reportModel[i].orderId +
                              "</td><td>" + reportModel[i].city +
                              "</td><td>" + reportModel[i].address +

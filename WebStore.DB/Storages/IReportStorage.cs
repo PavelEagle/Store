@@ -5,7 +5,7 @@ using WebStore.DB.Models.Reports;
 
 namespace WebStore.DB.Storages
 {
-    public interface IReportStorage
+    public interface IReportStorage: IBaseStorage
     {
         ValueTask<List<ProductInStore>> GetBestSellingProducts();
         ValueTask<List<Category>> GetCategoryWithFiveAndMoreProducts();

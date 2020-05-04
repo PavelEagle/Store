@@ -1,6 +1,4 @@
 ﻿using Dapper;
-using Microsoft.Extensions.Options;
-using WebStore.Core.ConfigurationOptions;
 using WebStore.DB.Models;
 using WebStore.DB.Models.Reports;
 using System.Collections.Generic;
@@ -10,14 +8,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using System;
 using System.Globalization;
+using WebStore.Core.ConfigurationOptions;
+using Microsoft.Extensions.Options;
 
 namespace  WebStore.DB.Storages
 {
-    public class ReportStorage : IReportStorage
+    public class ReportStorage: BaseStorage, IReportStorage
     {
-        private readonly IDbConnection connection;
-
-        public ReportStorage(IOptions<StorageOptions> storageOptions)
+        public ReportStorage(IOptions<StorageOptions> storageOptions) : base (storageOptions)
         {
             connection = new SqlConnection(storageOptions.Value.DBConnectionString);
         }
