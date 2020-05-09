@@ -8,15 +8,18 @@
             });
 
         function CreateTable(reportModel) {
-            var strResult = "<table><th>City</th><th>Total Money</th>";
+            var strResult = "<table class='table'><thead><tr>" + 
+                            "<th scope='col' >City</th>" +
+                            "<th scope='col'>Total Money, RUB</th>" +
+                            "</tr></thead><tbody>";
             reportModel.forEach(x => {
-                strResult += "<tr><td>" + x.city +
-                             "</td><td> " + x.total +
-                             "</td>";
+                strResult += "<tr><th scope='row'>" + x.city +
+                             "</th><td> " + x.total +
+                             "</td></tr>";
             });
-            strResult += "</table>";
+            strResult += "</tbody></table>";
 
-            document.getElementById('DateTable').innerHTML = strResult;
+            document.getElementById('dataViewer').innerHTML = strResult;
         }
     }
 
@@ -35,27 +38,32 @@
                 CreateTable(data);
             });
 
+
+
+
         function CreateTable(reportModel) {
             console.log(reportModel.length);
-            var strResult = "<table><th>City</th>" +
-                            "<th> Address</th>" +
-                            "<th> Manufacturer</th>" +
-                            "<th> Model</th>" +
-                             "<th> Price</th>";
+            var strResult = "<table class='table'><thead><tr>" +
+                            "<th scope='col'>City</th>" +
+                            "<th scope='col'>Address</th>" +
+                            "<th scope='col'>Manufacturer</th>" +
+                            "<th scope='col'>Model</th>" +
+                            "<th scope='col'>Price, RUB</th>" +
+                            "</tr></thead><tbody>";
 
             let length = reportModel.length > 100 ? 100 : reportModel.length;
                 
             for (let i = 0; i < length; i++) {
-                strResult += "</tr><td> " + reportModel[i].city +
+                strResult += "<tr><td scope='row'>" + reportModel[i].city +
                     "</td><td>" + reportModel[i].address +
                     "</td><td>" + reportModel[i].manufacturer +
                     "</td><td>" + reportModel[i].model +
                     "</td><td>" + reportModel[i].price +
-                    "</td>";
+                    "</td></tr>";
             }
-            strResult += "</table>";
+            strResult += "</tbody></table>";
 
-            document.getElementById('DateTable').innerHTML = strResult;
+            document.getElementById('dataViewer').innerHTML = strResult;
         }
     }
 
@@ -67,17 +75,20 @@
                 CreateTable(data);
             });
 
+
         function CreateTable(reportModel) {
-            var strResult = "<table><th>Category</th>" +
-                            "<th>Count of Product</th> ";
+            var strResult = "<table class='table'><thead><tr>" +
+                            "<th scope='col'>Category</th>" +
+                            "<th scope='col'>Count of Product</th>" +
+                            "</tr></thead><tbody>";
             reportModel.forEach(x => {
-                strResult += "<tr><td>" + x.category +
-                            "</td><td> " + x.countProduct +
+                strResult +="<tr><th scope='row'>" + x.category +
+                            "</th><td> " + x.countProduct +
                             "</td>";
             });
-            strResult += "</table>";
+            strResult += "</tbody></table>";
 
-            document.getElementById('DateTable').innerHTML = strResult;
+            document.getElementById('dataViewer').innerHTML = strResult;
         }
     }
 
@@ -97,21 +108,23 @@
             });
 
         function CreateTable(reportModel) {
-            var strResult = "<table><th>Manufacturer</th>" +
-                            "<th> Model</th>" +
-                            "<th> Model</th>";
+            var strResult = "<table class='table'><thead><tr>" +
+                            "<th scope='col'>Manufacturer</th>" +
+                            "<th scope='col'>Model</th>" +
+                            "<th scope='col'>Price, RUB</th>" +
+                            "</tr></thead><tbody>";
 
             let length = reportModel.length > 100 ? 100 : reportModel.length;
 
             for (let i = 0; i < length; i++) {
-                strResult += "<tr><td>" + reportModel[i].manufacturer +
+                strResult += "<tr><td scope='row'>" + reportModel[i].manufacturer +
                     "</td><td> " + reportModel[i].model +
                     "</td><td>" + reportModel[i].price +
                     "</td>";
                 }
-            strResult += "</table>";
+            strResult += "</tbody></table>";
 
-            document.getElementById('DateTable').innerHTML = strResult;
+            document.getElementById('dataViewer').innerHTML = strResult;
         }
     }
 
@@ -128,21 +141,23 @@
             });
 
         function CreateTable(reportModel) {
-            var strResult = "<table><th>OrderId</th>" +
-                            "<th>City</th>" +
-                            "<th>Address</th>" +
-                            "<th>Manufacturer</th>" +
-                            "<th>Model</th>" +
-                            "<th>Price</th>" +
-                            "<th>Quantity</th>" +
-                            "<th>Total</th>" +
-                            "<th>OrderAddress</th>" +
-                            "<th>Date</th>";
+            var strResult = "<table class='table'><thead><tr>" +
+                            "<th scope='col'>OrderId</th>" +
+                            "<th scope='col'>City</th>" +
+                            "<th scope='col'>Address</th>" +
+                            "<th scope='col'>Manufacturer</th>" +
+                            "<th scope='col'>Model</th>" +
+                            "<th scope='col'>Price</th>" +
+                            "<th scope='col'>Quantity</th>" +
+                            "<th scope='col'>Total, RUB</th>" +
+                            "<th scope='col'>Order Address</th>" +
+                            "<th scope='col'>Date</th>" +
+                            "</tr></thead><tbody>";
 
             let length = reportModel.length > 100 ? 100 : reportModel.length;
 
             for (let i = 0; i < length; i++) {
-                strResult += "<tr><td>" + reportModel[i].orderId +
+                strResult += "<tr><td scope='row'>" + reportModel[i].orderId +
                              "</td><td>" + reportModel[i].city +
                              "</td><td>" + reportModel[i].address +
                              "</td><td>" + reportModel[i].manufacturer +
@@ -154,9 +169,9 @@
                              "</td><td>" + reportModel[i].date +
                              "</td>";
                 }
-            strResult += "</table>";
+            strResult += "</tbody></table>";
 
-            document.getElementById('DateTable').innerHTML = strResult;
+            document.getElementById('dataViewer').innerHTML = strResult;
         }
 
         function FormateDate(date) {
@@ -173,13 +188,15 @@
             });
 
         function CreateTable(reportModel) {
-            var strResult = "<table><th>SalesInRF</th>" +
-                "<th>SalesInTheWorld</th> ";
-            strResult += "<tr><td>" + Math.round(reportModel.salesInRF) +
+            var strResult = "<table class='table'><thead><tr>" +
+                            "<th scope='col'>Sales In RF, RUB</th>" +
+                            "<th scope='col'>Sales In The World, RUB</th>" +
+                            "</tr></thead><tbody>";
+            strResult += "<tr><td scope='row'>" + Math.round(reportModel.salesInRF) +
                 "</td><td> " + Math.round(reportModel.salesInTheWorld)+
-                "</td></table>";
+                "</td></tbody></table>";
 
-            document.getElementById('DateTable').innerHTML = strResult;
+            document.getElementById('dataViewer').innerHTML = strResult;
         }
     }
 
@@ -189,20 +206,20 @@
     }
 
     function ShowCalendar() {
-        document.getElementById('DateTable').innerHTML = ' ';
+        document.getElementById('dataViewer').innerHTML = ' ';
         document.getElementById('date').style.display = 'block';
     }
 
     {
-        document.getElementById('moneyInCity').addEventListener("click", () => GetMoneyInCity());
-        document.getElementById('bestSellingProduct').addEventListener("click", () => GetProductInStore("best-selling"));
-        document.getElementById('inWareHouseAbsentMscSpb').addEventListener("click", () => GetProductInStore("in-warehouse-absent-msc-spb"));
-        document.getElementById('categoryWithFiveAndMoreProducts').addEventListener("click", () => GetCategoryWithFiveAndMoreProductss());
-        document.getElementById('soldOutProduct').addEventListener("click", () => GetProduct("sold-out"));
-        document.getElementById('noOrderedProduct').addEventListener("click", () => GetProduct("no-ordered"));
-        document.getElementById('showCalendar').addEventListener("click", () => ShowCalendar());
-        document.getElementById('orderByDate').addEventListener("click", () => GetOrdersByDate());
-        document.getElementById('salesByWorldAndRF').addEventListener("click", () => GetSalesByWorldAndRF());
+        document.getElementById('moneyInCity-btn').addEventListener("click", () => GetMoneyInCity());
+        document.getElementById('bestSellingProduct-btn').addEventListener("click", () => GetProductInStore("best-selling"));
+        document.getElementById('inWareHouseAbsentMscSpb-btn').addEventListener("click", () => GetProductInStore("in-warehouse-absent-msc-spb"));
+        document.getElementById('categoryWithFiveAndMoreProducts-btn').addEventListener("click", () => GetCategoryWithFiveAndMoreProductss());
+        document.getElementById('soldOutProduct-btn').addEventListener("click", () => GetProduct("sold-out"));
+        document.getElementById('noOrderedProduct-btn').addEventListener("click", () => GetProduct("no-ordered"));
+        document.getElementById('showCalendar-btn').addEventListener("click", () => ShowCalendar());
+        document.getElementById('orderByDate-btn').addEventListener("click", () => GetOrdersByDate());
+        document.getElementById('salesByWorldAndRF-btn').addEventListener("click", () => GetSalesByWorldAndRF());
         HideCalendar();
     }
 }
