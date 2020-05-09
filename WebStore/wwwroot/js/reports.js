@@ -210,18 +210,17 @@
         document.getElementById('date').style.display = 'block';
     }
 
-    {
-        document.getElementById('moneyInCity-btn').addEventListener("click", () => GetMoneyInCity());
-        document.getElementById('bestSellingProduct-btn').addEventListener("click", () => GetProductInStore("best-selling"));
-        document.getElementById('inWareHouseAbsentMscSpb-btn').addEventListener("click", () => GetProductInStore("in-warehouse-absent-msc-spb"));
-        document.getElementById('categoryWithFiveAndMoreProducts-btn').addEventListener("click", () => GetCategoryWithFiveAndMoreProductss());
-        document.getElementById('soldOutProduct-btn').addEventListener("click", () => GetProduct("sold-out"));
-        document.getElementById('noOrderedProduct-btn').addEventListener("click", () => GetProduct("no-ordered"));
-        document.getElementById('showCalendar-btn').addEventListener("click", () => ShowCalendar());
-        document.getElementById('orderByDate-btn').addEventListener("click", () => GetOrdersByDate());
-        document.getElementById('salesByWorldAndRF-btn').addEventListener("click", () => GetSalesByWorldAndRF());
-        HideCalendar();
-    }
+    document.getElementById('moneyInCity-btn').addEventListener("click", () => GetMoneyInCity());
+    document.getElementById('bestSellingProduct-btn').addEventListener("click", () => GetProductInStore("best-selling"));
+    document.getElementById('inWareHouseAbsentMscSpb-btn').addEventListener("click", () => GetProductInStore("in-warehouse-absent-msc-spb"));
+    document.getElementById('categoryWithFiveAndMoreProducts-btn').addEventListener("click", () => GetCategoryWithFiveAndMoreProductss());
+    document.getElementById('soldOutProduct-btn').addEventListener("click", () => GetProduct("sold-out"));
+    document.getElementById('noOrderedProduct-btn').addEventListener("click", () => GetProduct("no-ordered"));
+    document.getElementById('showCalendar-btn').addEventListener("click", () => ShowCalendar());
+    document.getElementById('orderByDate-btn').addEventListener("click", () => GetOrdersByDate());
+    document.getElementById('salesByWorldAndRF-btn').addEventListener("click", () => GetSalesByWorldAndRF());
+    HideCalendar();
+    GetMoneyInCity();
 }
 
 

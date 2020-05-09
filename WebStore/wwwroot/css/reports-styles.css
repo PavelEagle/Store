@@ -22,6 +22,7 @@
         background-color: white;
         width: 100%;
         letter-spacing: 0.1em;
+        cursor: pointer;
     }
 
         .reports-main-btn:hover {
@@ -34,9 +35,10 @@
             outline: none !important;
         }
 
-   .report-btn {
+    .report-btn {
         margin: 3px 0px 3px;
         font-size: 15px;
+        cursor: pointer;
     }
         .report-btn:hover {
             font-weight: bold;
@@ -66,7 +68,7 @@
 
 .table {
     margin:auto;
-    font-size: 14px;
+    font-size: 16px;
     letter-spacing: 0;
 }
     .table thead th {
@@ -80,6 +82,7 @@
     #dataViewer th {
         flex-grow: 1;
     }
+
 
 
    
