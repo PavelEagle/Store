@@ -14,12 +14,12 @@ namespace WebStore.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult ReportController()
         {
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult ProductController()
         {
             return View();
         }

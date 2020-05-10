@@ -1,75 +1,48 @@
-﻿body {
+﻿.toggler-reports {
+    border: none;
+    user-select: none;
+    text-align: center;
+    color: var(--navifation-btn-color);
+    cursor: pointer;
+    user-select: none;
     letter-spacing: 0.1em;
+    width: 220px;
+    font-size: 18px;
+    margin: 0 20px 0 20px;
 }
 
-.header {
-    font-size: 42px;
+.report-btn {
+    margin: 3px 0px 3px;
+    font-size: 17px;
+    cursor: pointer;
 }
-
-
-.navbar {
-    background-color: #f8f9fa;
-    padding: 0;
-}
-
-    .navabar-content {
-        display: flex;
-        margin-bottom: -0.5rem;
-        margin-top: -0.5rem;
-        flex-grow: 1;
-        align-items: center;
+    .report-btn:hover {
+        color: var(--navifation-btn-active-color);
     }
 
-        .toggler-reports {
-            border: none;
-            user-select: none;
-            text-align: center;
-            color: black;
-            cursor: pointer;
-            user-select: none;
-            letter-spacing: 0.1em;
-        }
+    .report-btn,
+    .report-btn:hover,
+    .report-btn:active {
+        outline: none !important;
+    }
 
-        .report-btn {
-            margin: 3px 0px 3px;
-            font-size: 15px;
-            cursor: pointer;
-        }
+.navbar-nav .dropdown-menu {
+    position: absolute;
+}
 
-            .report-btn:hover {
-                font-weight: bold;
-            }
+.dropdown-menu.show {
+    border: none;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: var(--navifation-btn-color);
+    text-align: center;
+    margin-left: -26px;
+}
 
-            .report-btn,
-            .report-btn:hover,
-            .report-btn:active {
-                outline: none !important;
-            }
-        .navbar-nav .dropdown-menu {
-            position: absolute;
-        }
-
-
-        .search-form {
-            margin-top: 0;
-            margin-left: auto;
-            margin-bottom: 0;
-        }
-
-        .search-text {
-            width: 150px;
-            height: 28px;
-            margin-right: 0.5rem;
-        }
-
-        .search-btn {
-            padding: 2px;
-            font-size: 14px;
-            margin-bottom: 0;
-            margin-top: 0;
-            color: #28a745;
-            border-color: #28a745;
-        }
+#report-info {
+    color: var(--navifation-btn-color);
+    font-size: 15px;
+    margin-top: 2px;
+}
 
 #date {
     margin-top: 10px;
@@ -97,7 +70,6 @@
         font-size: 16px;
         letter-spacing: 0;
     }
-
         .table thead th {
             vertical-align: middle;
             flex-grow: 1;

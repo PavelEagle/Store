@@ -2,7 +2,7 @@
     function ProductGet() {
         HideProductDate();
         ShowGetByIdDate();
-        let url = 'https://localhost:5001/api/product/' + document.getElementById("productId").value;
+        let url = 'https://localhost:5001/api/product/' + document.getElementById("product-id").value;
         fetch(url)
             .then((response) => response.json())
             .then((data) => {
@@ -12,12 +12,11 @@
 
     async function ProductPost() {
         let data = {
-            manufacturer: document.getElementById("postManufacturer").value,
-            model: document.getElementById("postModel").value,
-            price: +document.getElementById("postPrice").value,
-            subcategoryId: +document.getElementById("postSubcategory").value
+            manufacturer: document.getElementById("post-manufacturer").value,
+            model: document.getElementById("post-model").value,
+            price: +document.getElementById("post-price").value,
+            subcategoryId: +document.getElementById("post-sub-category").value
         };
-        console.log(data);
         let response = await fetch('https://localhost:5001/api/product', {
             method: 'post',
             body: JSON.stringify(data),
@@ -29,11 +28,11 @@
 
     async function ProductUpdate() {
         let data = {
-            id: +document.getElementById("updateId").value,
-            manufacturer: document.getElementById("updateManufacturer").value,
-            model: document.getElementById("updateModel").value,
-            price: +document.getElementById("updatePrice").value,
-            subcategoryId: +document.getElementById("updateSubcategory").value
+            id: +document.getElementById("update-id").value,
+            manufacturer: document.getElementById("update-manufacturer").value,
+            model: document.getElementById("update-model").value,
+            price: +document.getElementById("update-price").value,
+            subcategoryId: +document.getElementById("update-subcategory").value
         };
         console.log(data);
         let response = await fetch('https://localhost:5001/api/product', {
@@ -46,63 +45,65 @@
     }
 
     async function ProductDelete() {
-        let url = 'https://localhost:5001/api/product/' + document.getElementById("productId").value;
+        let url = 'https://localhost:5001/api/product/' + document.getElementById("product-id").value;
         let response = await fetch(url, {
             method: 'delete',
             headers: { 'Content-type': 'application/json' }
         });
         if (response.status == 200) {
-            document.getElementById('productDateTable').innerHTML = "Product with Id "
-                + document.getElementById("productId").value + " was deleted";
+            document.getElementById('product-date-viewer').innerHTML = "Product with Id "
+                + document.getElementById("product-id").value + " was deleted";
         }
-        else document.getElementById('productDateTable').innerHTML = "error";
+        else document.getElementById('product-date-viewer').innerHTML = "error";
     }
 
     function CreateProductTable(reportModel) {
         console.log(reportModel);
-        var strResult = "<table><th>Id</th>" +
-                        "<th>Manufacturer</th>" +
-                        "<th>Model</th>" +
-                        "<th>Price</th>" +
-                        "<th>Category</th>" +
-                        "<th>Subcategory</th>";
-           strResult += "<tr><td>" + reportModel.id +
+        var strResult = "<table class='table'><thead><tr>" +
+                        "<th scope='col'>Id</th>" +
+                        "<th scope='col'>Manufacturer</th>" +
+                        "<th scope='col'>Model</th>" +
+                        "<th scope='col'>Price</th>" +
+                        "<th scope='col'>Category</th>" +
+                        "<th scope='col'>Subcategory</th>" +
+                        "</tr></thead><tbody>";
+           strResult += "<tr><td scope='row'>" + reportModel.id +
                         "</td><td>" + reportModel.manufacturer +
                         "</td><td>" + reportModel.model +
                         "</td><td>" + reportModel.price +
                         "</td><td>" + reportModel.categoryName +
                         "</td><td>" + reportModel.subcategory +
-                        "</td><td></table>";
+                        "</td></tbody></table>";
 
-        document.getElementById('productDateTable').innerHTML = strResult;
+        document.getElementById('product-date-viewer').innerHTML = strResult;
     }
 
     function HideProductDate() {
-        document.getElementById('productGetByIdData').style.display = 'none';
-        document.getElementById('productPostData').style.display = 'none';
-        document.getElementById('productUpdateData').style.display = 'none';
-        document.getElementById('productDateTable').innerHTML = ' ';
+        document.getElementById('product-get-by-id-data').style.display = 'none';
+        document.getElementById('product-post-data').style.display = 'none';
+        document.getElementById('product-update-data').style.display = 'none';
+        document.getElementById('product-date-viewer').innerHTML = ' ';
     }
 
     function ShowGetByIdDate() {
         HideProductDate()
-        document.getElementById('productGetByIdData').style.display = 'inline-block';
+        document.getElementById('product-get-by-id-data').style.display = 'inline-block';
     }
     function ShowPostDate() {
         HideProductDate()
-        document.getElementById('productPostData').style.display = 'block';
+        document.getElementById('product-post-data').style.display = 'block';
     }
 
     function ShowUpdateDate() {
         HideProductDate()
-        document.getElementById('productUpdateData').style.display = 'block';
+        document.getElementById('product-update-data').style.display = 'block';
     }
-    document.getElementById('productGetDelMethodBtn').addEventListener("click", () => ShowGetByIdDate());
-    document.getElementById('productPostMethodBtn').addEventListener("click", () => ShowPostDate());
-    document.getElementById('productUpdateMethodBtn').addEventListener("click", () => ShowUpdateDate());
-    document.getElementById('getByIdBtn').addEventListener("click", () => ProductGet());
-    document.getElementById('postBtn').addEventListener("click", () => ProductPost());
-    document.getElementById('updateBtn').addEventListener("click", () => ProductUpdate());
-    document.getElementById('deleteByIdBtn').addEventListener("click", () => ProductDelete());
+    document.getElementById('product-get-del-method-btn').addEventListener("click", () => ShowGetByIdDate());
+    document.getElementById('product-post-method-btn').addEventListener("click", () => ShowPostDate());
+    document.getElementById('product-update-method-btn').addEventListener("click", () => ShowUpdateDate());
+    document.getElementById('get-by-id-btn').addEventListener("click", () => ProductGet());
+    document.getElementById('post-btn').addEventListener("click", () => ProductPost());
+    document.getElementById('update-btn').addEventListener("click", () => ProductUpdate());
+    document.getElementById('delete-by-id-btn').addEventListener("click", () => ProductDelete());
     HideProductDate();
 }

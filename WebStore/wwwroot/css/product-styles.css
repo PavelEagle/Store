@@ -1,0 +1,12 @@
+﻿a.product-btn {
+    font-size: 18px;
+    margin: 0 10px 0 10px;
+    color: var(--navifation-btn-color);
+}
+
+.product-btn:hover {
+    color: var(--navifation-btn-active-color);
+    text-decoration: none;
+}
+
+.

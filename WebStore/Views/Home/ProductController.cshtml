@@ -1,0 +1,55 @@
+﻿@{
+    ViewData["Title"] = "Product Controller";
+}
+    <div class="text-center">
+        <h1 class="header">@ViewData["Title"]</h1>
+    </div>
+    <nav class="navbar">
+        <div class="navbar-collapse navabar-content" id="navbarSupportedContent">
+            <ul class="navbar-nav flex-row">
+                <li class="nav-item active p-2" id="product-get-del-method-btn">
+                    <a class="product-btn" href="#">Get/Delete</a>
+                </li>
+                <li class="nav-item p-2" id="product-post-method-btn">
+                    <a class="product-btn" href="#">Post</a>
+                </li>
+                <li class="nav-item p-2" id="product-update-method-btn">
+                    <a class="product-btn" href="#">Update</a>
+                </li>
+                <li class="nav-item p-2">
+                    <a class="product-btn" href="#">Search(in features)</a>
+                </li>
+            </ul>
+            <form class="form-inline search-form p-2">
+                <input class="form-control search-text" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn search-btn" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+
+    <div id="productDate" class="row">
+        <div id="product-get-by-id-data">
+            <input id="product-id" type="text" name="productId">
+            <input id="get-by-id-btn" value="Get" type="button">
+            <input id="delete-by-id-btn" value="Delete" type="button">
+        </div>
+        <div id="product-post-data">
+            <p>Manufacturer: <input id="post-manufacturer" type="text" name="Manufacturer"></p>
+            <p>Model: <input id="post-model" type="text" name="Model"></p>
+            <p>Price: <input id="post-price" type="text" name="Price"></p>
+            <p>Subcategory: <input id="post-sub-category" type="text" name="Subcategory"></p>
+            <input id="post-btn" value="Post" type="button">
+        </div>
+        <div id="product-update-data">
+            <p>Id: <input id="update-id" type="text" name="Id"></p>
+            <p>Manufacturer: <input id="update-manufacturer" type="text" name="Manufacturer"></p>
+            <p>Model: <input id="update-model" type="text" name="Model"></p>
+            <p>Price: <input id="update-price" type="text" name="Price"></p>
+            <p>Subcategory: <input id="update-subcategory" type="text" name="Subcategory"></p>
+            <input id="update-btn" value="Update" type="button">
+        </div>
+    </div>
+    <div id="product-date-viewer"></div>
+    
+        <script src="~/js/product.js"></script>
+
