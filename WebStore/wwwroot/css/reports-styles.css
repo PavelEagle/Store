@@ -6,48 +6,69 @@
     font-size: 42px;
 }
 
-.toggler-reports {
-    border: none;
-    user-select: none;
-    text-align: center;
-    color: black;
-    cursor: pointer;
-    user-select: none;
-    letter-spacing: 0.1em;
+
+.navbar {
+    background-color: #f8f9fa;
+    padding: 0;
 }
-    .reports-main-btn {
-        border: none;
-        text-align: center;
-        font-size: 22px;
-        background-color: white;
-        width: 100%;
-        letter-spacing: 0.1em;
-        cursor: pointer;
+
+    .navabar-content {
+        display: flex;
+        margin-bottom: -0.5rem;
+        margin-top: -0.5rem;
+        flex-grow: 1;
+        align-items: center;
     }
 
-        .reports-main-btn:hover {
-            font-weight: bold;
+        .toggler-reports {
+            border: none;
+            user-select: none;
+            text-align: center;
+            color: black;
+            cursor: pointer;
+            user-select: none;
+            letter-spacing: 0.1em;
         }
 
-        .reports-main-btn,
-        .reports-main-btn:hover,
-        .reports-main-btn:active {
-            outline: none !important;
+        .report-btn {
+            margin: 3px 0px 3px;
+            font-size: 15px;
+            cursor: pointer;
         }
 
-    .report-btn {
-        margin: 3px 0px 3px;
-        font-size: 15px;
-        cursor: pointer;
-    }
-        .report-btn:hover {
-            font-weight: bold;
+            .report-btn:hover {
+                font-weight: bold;
+            }
+
+            .report-btn,
+            .report-btn:hover,
+            .report-btn:active {
+                outline: none !important;
+            }
+        .navbar-nav .dropdown-menu {
+            position: absolute;
         }
 
-        .report-btn,
-        .report-btn:hover,
-        .report-btn:active {
-            outline: none !important;
+
+        .search-form {
+            margin-top: 0;
+            margin-left: auto;
+            margin-bottom: 0;
+        }
+
+        .search-text {
+            width: 150px;
+            height: 28px;
+            margin-right: 0.5rem;
+        }
+
+        .search-btn {
+            padding: 2px;
+            font-size: 14px;
+            margin-bottom: 0;
+            margin-top: 0;
+            color: #28a745;
+            border-color: #28a745;
         }
 
 #date {
@@ -66,22 +87,26 @@
         line-height: 10px;
     }
 
-.table {
-    margin:auto;
-    font-size: 16px;
-    letter-spacing: 0;
-}
-    .table thead th {
-        vertical-align: middle;
-    }
+
 
 #dataViewer {
     display: flex;
 }
-
-    #dataViewer th {
-        flex-grow: 1;
+    .table {
+        margin: auto;
+        font-size: 16px;
+        letter-spacing: 0;
     }
+
+        .table thead th {
+            vertical-align: middle;
+            flex-grow: 1;
+        }
+
+
+
+
+
 
 
 

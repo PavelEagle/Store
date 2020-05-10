@@ -20,6 +20,7 @@
             strResult += "</tbody></table>";
 
             document.getElementById('dataViewer').innerHTML = strResult;
+            document.getElementById('report-info').innerHTML = "Money In City";
         }
     }
 
@@ -64,6 +65,13 @@
             strResult += "</tbody></table>";
 
             document.getElementById('dataViewer').innerHTML = strResult;
+            switch (method) {
+                case "best-selling": document.getElementById('report-info').innerHTML = "Best selling";
+                    break;
+                case "in-warehouse-absent-msc-spb": document.getElementById('report-info').innerHTML = "In stock in warehouse, absent in Msc and Spb";
+                    break;
+            }
+            
         }
     }
 
@@ -89,6 +97,7 @@
             strResult += "</tbody></table>";
 
             document.getElementById('dataViewer').innerHTML = strResult;
+            document.getElementById('report-info').innerHTML = "Category with 5 and more products";
         }
     }
 
@@ -125,6 +134,12 @@
             strResult += "</tbody></table>";
 
             document.getElementById('dataViewer').innerHTML = strResult;
+            switch (method) {
+                case "sold-out": document.getElementById('report-info').innerHTML = "Sold out products";
+                    break;
+                case "no-ordered": document.getElementById('report-info').innerHTML = "No ordered products";
+                    break;
+            }
         }
     }
 
@@ -172,6 +187,7 @@
             strResult += "</tbody></table>";
 
             document.getElementById('dataViewer').innerHTML = strResult;
+            document.getElementById('report-info').innerHTML = "Orders by date";
         }
 
         function FormateDate(date) {
@@ -197,6 +213,7 @@
                 "</td></tbody></table>";
 
             document.getElementById('dataViewer').innerHTML = strResult;
+            document.getElementById('report-info').innerHTML = "Sales By World And RF";
         }
     }
 
