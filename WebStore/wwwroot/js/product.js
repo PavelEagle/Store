@@ -51,10 +51,10 @@
             headers: { 'Content-type': 'application/json' }
         });
         if (response.status == 200) {
-            document.getElementById('product-date-viewer').innerHTML = "Product with Id "
+            document.getElementById('product-data-viewer').innerHTML = "Product with Id "
                 + document.getElementById("product-id").value + " was deleted";
         }
-        else document.getElementById('product-date-viewer').innerHTML = "error";
+        else document.getElementById('product-data-viewer').innerHTML = "error";
     }
 
     function CreateProductTable(reportModel) {
@@ -75,19 +75,19 @@
                         "</td><td>" + reportModel.subcategory +
                         "</td></tbody></table>";
 
-        document.getElementById('product-date-viewer').innerHTML = strResult;
+        document.getElementById('product-data-viewer').innerHTML = strResult;
     }
 
     function HideProductDate() {
         document.getElementById('product-get-by-id-data').style.display = 'none';
         document.getElementById('product-post-data').style.display = 'none';
         document.getElementById('product-update-data').style.display = 'none';
-        document.getElementById('product-date-viewer').innerHTML = ' ';
+        document.getElementById('product-data-viewer').innerHTML = ' ';
     }
 
     function ShowGetByIdDate() {
         HideProductDate()
-        document.getElementById('product-get-by-id-data').style.display = 'inline-block';
+        document.getElementById('product-get-by-id-data').style.display = 'block';
     }
     function ShowPostDate() {
         HideProductDate()

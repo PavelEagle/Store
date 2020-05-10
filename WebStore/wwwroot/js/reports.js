@@ -19,7 +19,7 @@
             });
             strResult += "</tbody></table>";
 
-            document.getElementById('dataViewer').innerHTML = strResult;
+            document.getElementById('data-viewer').innerHTML = strResult;
             document.getElementById('report-info').innerHTML = "Money In City";
         }
     }
@@ -64,7 +64,7 @@
             }
             strResult += "</tbody></table>";
 
-            document.getElementById('dataViewer').innerHTML = strResult;
+            document.getElementById('data-viewer').innerHTML = strResult;
             switch (method) {
                 case "best-selling": document.getElementById('report-info').innerHTML = "Best selling";
                     break;
@@ -96,7 +96,7 @@
             });
             strResult += "</tbody></table>";
 
-            document.getElementById('dataViewer').innerHTML = strResult;
+            document.getElementById('data-viewer').innerHTML = strResult;
             document.getElementById('report-info').innerHTML = "Category with 5 and more products";
         }
     }
@@ -133,7 +133,7 @@
                 }
             strResult += "</tbody></table>";
 
-            document.getElementById('dataViewer').innerHTML = strResult;
+            document.getElementById('data-viewer').innerHTML = strResult;
             switch (method) {
                 case "sold-out": document.getElementById('report-info').innerHTML = "Sold out products";
                     break;
@@ -145,8 +145,8 @@
 
     async function GetOrdersByDate() {
 
-        let startDateForUrl = FormateDate(this.document.getElementById("startDate").value);
-        let endDateForUrl = FormateDate(this.document.getElementById("endDate").value);
+        let startDateForUrl = FormateDate(this.document.getElementById("start-date").value);
+        let endDateForUrl = FormateDate(this.document.getElementById("end-date").value);
         let url = 'https://localhost:5001/api/report/info-about-orders-by-date/' + startDateForUrl + '/' + endDateForUrl;
 
         fetch(url)
@@ -186,7 +186,7 @@
                 }
             strResult += "</tbody></table>";
 
-            document.getElementById('dataViewer').innerHTML = strResult;
+            document.getElementById('data-viewer').innerHTML = strResult;
             document.getElementById('report-info').innerHTML = "Orders by date";
         }
 
@@ -212,7 +212,7 @@
                 "</td><td> " + Math.round(reportModel.salesInTheWorld)+
                 "</td></tbody></table>";
 
-            document.getElementById('dataViewer').innerHTML = strResult;
+            document.getElementById('data-viewer').innerHTML = strResult;
             document.getElementById('report-info').innerHTML = "Sales By World And RF";
         }
     }
@@ -223,7 +223,7 @@
     }
 
     function ShowCalendar() {
-        document.getElementById('dataViewer').innerHTML = ' ';
+        document.getElementById('data-viewer').innerHTML = ' ';
         document.getElementById('date').style.display = 'block';
     }
 
@@ -234,7 +234,7 @@
     document.getElementById('soldOutProduct-btn').addEventListener("click", () => GetProduct("sold-out"));
     document.getElementById('noOrderedProduct-btn').addEventListener("click", () => GetProduct("no-ordered"));
     document.getElementById('showCalendar-btn').addEventListener("click", () => ShowCalendar());
-    document.getElementById('orderByDate-btn').addEventListener("click", () => GetOrdersByDate());
+    document.getElementById('order-by-date-btn').addEventListener("click", () => GetOrdersByDate());
     document.getElementById('salesByWorldAndRF-btn').addEventListener("click", () => GetSalesByWorldAndRF());
     HideCalendar();
     GetMoneyInCity();

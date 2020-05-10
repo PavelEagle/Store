@@ -1,12 +1,30 @@
-﻿a.product-btn {
+﻿a.product-method-btn {
     font-size: 18px;
     margin: 0 10px 0 10px;
     color: var(--navifation-btn-color);
 }
 
-.product-btn:hover {
+.product-method-btn:hover {
     color: var(--navifation-btn-active-color);
     text-decoration: none;
 }
 
-.
+#productDate{
+    display:grid;
+}
+
+.product-input-data {
+    width: 125px;
+    height: 28px;
+    border-radius: 0.25rem;
+}
+
+.product-input-info {
+    width: 125px;
+    display: inline-block;
+    margin-left: 40px;
+}
+
+.product-call-method-btn {
+    margin-left: 40px;
+}

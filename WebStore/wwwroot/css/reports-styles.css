@@ -49,15 +49,17 @@
     margin-bottom: 15px;
 }
 
-    #startDate, #endDate, #orderByDate-btn {
-        margin: 4px 5px 0px 5px;
-        height: 20px;
-        padding: 0;
+    #start-date, #end-date{
+        margin: 0 5px 0px 5px;
+        height: 28px;
+        border-radius: 0.25rem;
     }
 
-    #orderByDate-btn {
+    #order-by-date-btn {
         font-size: 16px;
         line-height: 10px;
+        height: 28px;
+        border-radius: 0.25rem;
     }
 
 
