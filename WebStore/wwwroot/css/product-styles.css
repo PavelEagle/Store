@@ -1,4 +1,4 @@
-﻿a.product-method-btn {
+﻿.product-method-btn {
     font-size: 18px;
     margin: 0 10px 0 10px;
     color: var(--navifation-btn-color);
@@ -8,9 +8,13 @@
     color: var(--navifation-btn-active-color);
     text-decoration: none;
 }
+.product-btn-active {
+    color: var(--navifation-btn-active-color);
+}
 
-#productDate{
-    display:grid;
+
+#productDate {
+    display: grid;
 }
 
 .product-input-data {

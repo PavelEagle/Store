@@ -55,12 +55,12 @@
             let length = reportModel.length > 100 ? 100 : reportModel.length;
                 
             for (let i = 0; i < length; i++) {
-                strResult += "<tr><td scope='row'>" + reportModel[i].city +
-                    "</td><td>" + reportModel[i].address +
-                    "</td><td>" + reportModel[i].manufacturer +
-                    "</td><td>" + reportModel[i].model +
-                    "</td><td>" + reportModel[i].price +
-                    "</td></tr>";
+               strResult += "<tr><td scope='row'>" + reportModel[i].city +
+                            "</td><td>" + reportModel[i].address +
+                            "</td><td>" + reportModel[i].manufacturer +
+                            "</td><td>" + reportModel[i].model +
+                            "</td><td>" + reportModel[i].price +
+                            "</td></tr>";
             }
             strResult += "</tbody></table>";
 
@@ -126,10 +126,10 @@
             let length = reportModel.length > 100 ? 100 : reportModel.length;
 
             for (let i = 0; i < length; i++) {
-                strResult += "<tr><td scope='row'>" + reportModel[i].manufacturer +
-                    "</td><td> " + reportModel[i].model +
-                    "</td><td>" + reportModel[i].price +
-                    "</td>";
+               strResult += "<tr><td scope='row'>" + reportModel[i].manufacturer +
+                            "</td><td> " + reportModel[i].model +
+                            "</td><td>" + reportModel[i].price +
+                            "</td>";
                 }
             strResult += "</tbody></table>";
 
@@ -184,7 +184,7 @@
                              "</td><td>" + reportModel[i].date +
                              "</td>";
                 }
-            strResult += "</tbody></table>";
+                strResult += "</tbody></table>";
 
             document.getElementById('data-viewer').innerHTML = strResult;
             document.getElementById('report-info').innerHTML = "Orders by date";
@@ -208,9 +208,9 @@
                             "<th scope='col'>Sales In RF, RUB</th>" +
                             "<th scope='col'>Sales In The World, RUB</th>" +
                             "</tr></thead><tbody>";
-            strResult += "<tr><td scope='row'>" + Math.round(reportModel.salesInRF) +
-                "</td><td> " + Math.round(reportModel.salesInTheWorld)+
-                "</td></tbody></table>";
+               strResult += "<tr><td scope='row'>" + Math.round(reportModel.salesInRF) +
+                            "</td><td> " + Math.round(reportModel.salesInTheWorld)+
+                            "</td></tbody></table>";
 
             document.getElementById('data-viewer').innerHTML = strResult;
             document.getElementById('report-info').innerHTML = "Sales By World And RF";
@@ -227,15 +227,15 @@
         document.getElementById('date').style.display = 'block';
     }
 
-    document.getElementById('moneyInCity-btn').addEventListener("click", () => GetMoneyInCity());
-    document.getElementById('bestSellingProduct-btn').addEventListener("click", () => GetProductInStore("best-selling"));
-    document.getElementById('inWareHouseAbsentMscSpb-btn').addEventListener("click", () => GetProductInStore("in-warehouse-absent-msc-spb"));
-    document.getElementById('categoryWithFiveAndMoreProducts-btn').addEventListener("click", () => GetCategoryWithFiveAndMoreProductss());
-    document.getElementById('soldOutProduct-btn').addEventListener("click", () => GetProduct("sold-out"));
-    document.getElementById('noOrderedProduct-btn').addEventListener("click", () => GetProduct("no-ordered"));
-    document.getElementById('showCalendar-btn').addEventListener("click", () => ShowCalendar());
+    document.getElementById('money-in-city-btn').addEventListener("click", () => GetMoneyInCity());
+    document.getElementById('best-selling-product-btn').addEventListener("click", () => GetProductInStore("best-selling"));
+    document.getElementById('in-warehouse-absent-msc-spb-btn').addEventListener("click", () => GetProductInStore("in-warehouse-absent-msc-spb"));
+    document.getElementById('category-with-five-and-more-products-btn').addEventListener("click", () => GetCategoryWithFiveAndMoreProductss());
+    document.getElementById('sold-out-product-btn').addEventListener("click", () => GetProduct("sold-out"));
+    document.getElementById('no-ordered-product-btn').addEventListener("click", () => GetProduct("no-ordered"));
+    document.getElementById('show-calendar-btn').addEventListener("click", () => ShowCalendar());
     document.getElementById('order-by-date-btn').addEventListener("click", () => GetOrdersByDate());
-    document.getElementById('salesByWorldAndRF-btn').addEventListener("click", () => GetSalesByWorldAndRF());
+    document.getElementById('sales-by-world-and-rf-btn').addEventListener("click", () => GetSalesByWorldAndRF());
     HideCalendar();
     GetMoneyInCity();
 }

@@ -86,18 +86,35 @@
     }
 
     function ShowGetByIdDate() {
-        HideProductDate()
+        HideProductDate();
+        removeProductBtnActiveClass();
         document.getElementById('product-get-by-id-data').style.display = 'block';
+        document.getElementById('product-get-del-method-btn')
+            .firstElementChild.classList.add("product-btn-active");
     }
     function ShowPostDate() {
-        HideProductDate()
+        HideProductDate();
+        removeProductBtnActiveClass();
         document.getElementById('product-post-data').style.display = 'block';
+        document.getElementById('product-post-method-btn')
+            .firstElementChild.classList.add("product-btn-active");
     }
 
     function ShowUpdateDate() {
-        HideProductDate()
+        HideProductDate();
+        removeProductBtnActiveClass();
         document.getElementById('product-update-data').style.display = 'block';
+        document.getElementById('product-update-method-btn')
+            .firstElementChild.classList.add("product-btn-active");
     }
+
+    function removeProductBtnActiveClass() {
+        var elems = document.querySelector(".product-btn-active");
+        if (elems !== null) {
+            elems.classList.remove("product-btn-active");
+        }
+    }
+
     document.getElementById('product-get-del-method-btn').addEventListener("click", () => ShowGetByIdDate());
     document.getElementById('product-post-method-btn').addEventListener("click", () => ShowPostDate());
     document.getElementById('product-update-method-btn').addEventListener("click", () => ShowUpdateDate());
@@ -106,4 +123,5 @@
     document.getElementById('update-btn').addEventListener("click", () => ProductUpdate());
     document.getElementById('delete-by-id-btn').addEventListener("click", () => ProductDelete());
     HideProductDate();
+    ProductGet();
 }
