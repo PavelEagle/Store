@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
+using WebStore.Core;
 using WebStore.DB.Models;
 using WebStore.DB.Storages;
-using WebStore.Repository.Common;
 
 namespace WebStore.Repository.Repositories
 {
@@ -23,16 +23,13 @@ namespace WebStore.Repository.Repositories
                 result.RequestData = await _orderStorage.OrderGetById(productId);
 
                 decimal currencyExchangeRate;
-                string valute;
                 switch (result.RequestData.Store.City.Id)
                 {
-                    case (int)CurrencyEnum.Minsk:
-                        valute = "BYN";
-                        currencyExchangeRate = await GetCurrencyExchangeRate.GetCurrency(valute);
+                    case (int)CityEnum.Minsk:
+                        currencyExchangeRate = CurrencyRates.ActualCurrencyRates.Find(item=>item.Code == "BYN").Rate;
                         break;
-                    case (int)CurrencyEnum.Kiev:
-                        valute = "UAH";
-                        currencyExchangeRate = await GetCurrencyExchangeRate.GetCurrency(valute);
+                    case (int)CityEnum.Kiev:
+                        currencyExchangeRate = CurrencyRates.ActualCurrencyRates.Find(item => item.Code == "UAH").Rate;
                         break;
                     default:
                         currencyExchangeRate = 1;

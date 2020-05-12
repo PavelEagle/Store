@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using WebStore.API.Controllers;
 using WebStore.Controllers;
+using WebStore.Core;
 using WebStore.DB.Storages;
 using WebStore.Repository.Repositories;
 

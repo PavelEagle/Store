@@ -1,4 +1,4 @@
-﻿namespace WebStore.Repository
+﻿namespace WebStore.Core
 {
     public class RequestResult<T>
     {

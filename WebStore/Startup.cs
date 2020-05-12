@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WebStore.API.Configuration;
+using WebStore.Core;
 using WebStore.Core.ConfigurationOptions;
 
 namespace WebStore
@@ -66,6 +67,8 @@ namespace WebStore
             app.UseRouting();
 
             app.UseAuthorization();
+
+            GetCurrencyExchangeRate.GetRates();
 
             app.UseEndpoints(endpoints =>
             {

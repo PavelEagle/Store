@@ -1,5 +1,6 @@
 ﻿using WebStore.DB.Models;
 using System.Threading.Tasks;
+using WebStore.Core;
 
 namespace WebStore.Repository.Repositories
 {

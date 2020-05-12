@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using WebStore.Core;
 using WebStore.DB.Models;
 using WebStore.DB.Models.Reports;
 using WebStore.Repository;

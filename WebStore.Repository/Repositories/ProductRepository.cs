@@ -2,6 +2,7 @@
 using WebStore.DB.Storages;
 using System;
 using System.Threading.Tasks;
+using WebStore.Core;
 
 namespace WebStore.Repository.Repositories
 {
