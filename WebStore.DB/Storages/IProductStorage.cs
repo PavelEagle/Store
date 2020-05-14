@@ -8,6 +8,6 @@ namespace WebStore.DB.Storages
     {
         ValueTask<Product> ProductGetById(int id);
         ValueTask<Product> ProductInsertOrUpdate(Product product);
-        ValueTask ProductDeleteById(int id);
+        ValueTask<bool> ProductDeleteById(int id);
     }
 }

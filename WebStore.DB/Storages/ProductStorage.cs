@@ -88,16 +88,21 @@ namespace WebStore.DB.Storages
             }
         }
 
-        public async ValueTask ProductDeleteById(int id)
+        public async ValueTask<bool> ProductDeleteById(int id)
         {
             try
             {
                 await connection.QueryAsync<long>(
                     SpName.ProductDeleteById,
                     new { id },
-                    transaction: transaction,
                     commandType: CommandType.StoredProcedure
                 );
+                var model = await ProductGetById(id);
+                if (model!=null) {
+                    return model.isDeleted;
+                }
+                return false;
+                
             }
             catch (SqlException ex)
             {

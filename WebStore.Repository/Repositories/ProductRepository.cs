@@ -30,27 +30,15 @@ namespace WebStore.Repository.Repositories
             return result;
         }
 
-        public async ValueTask<RequestResult<string>> ProductDelete(int productId)
+        public async ValueTask<RequestResult<bool>> ProductDelete(int productId)
         {
-            var result = new RequestResult<string>();
+            var result = new RequestResult<bool>();
             try
             {
                 _productStorage.TransactionStart();
-                var getProductData = await _productStorage.ProductGetById(productId);
-                await _productStorage.ProductDeleteById(productId);
-                if (getProductData == null)
-                {
-                    result.IsOkay = false;
-                }
-                else
-                {
-                    result.RequestData = $"Model with id {productId} was deleted";
-                    result.IsOkay = true;
-                }
-
+                result.RequestData = await _productStorage.ProductDeleteById(productId);
                 _productStorage.TransactionCommit();
-
-
+                result.IsOkay = true;
             }
             catch (Exception ex)
             {
