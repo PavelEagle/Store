@@ -1,6 +1,5 @@
 ﻿using Dapper;
 using WebStore.DB.Models;
-using WebStore.DB.Models.Reports;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -79,14 +78,26 @@ namespace  WebStore.DB.Storages
             DateTime formatedEndDate = DateTime.ParseExact(endDate, "ddMMyyyy", CultureInfo.InvariantCulture);
             try
             {
-                var result = await connection.QueryAsync<City, Store, Product, OrderInfo, OrderInfo>(
+                var orderDictionary = new Dictionary<int, OrderInfo>();
+
+                var result = await connection.QueryAsync<OrderInfo, City, Store, Product_Order, OrderInfo>(
                     SpName.GetInfoAboutOrdersByDate,
-                    (city, store, product, orderinfo) =>
+                    (orderInfo, city, store, po) =>
                     {
-                        OrderInfo newOrderInfo = orderinfo;
-                        orderinfo.Store = store;
-                        store.City = city;
-                        newOrderInfo.Product = product;
+                        if (!orderDictionary.TryGetValue((int)orderInfo.OrderId, out OrderInfo newOrderInfo))
+                        {
+                            newOrderInfo = orderInfo;
+                            newOrderInfo.Store = store;
+                            newOrderInfo.Store.City = city;
+                            newOrderInfo.Products = new List<Product_Order>();
+                            orderDictionary.Add((int)orderInfo.OrderId, newOrderInfo);
+                        }
+
+                        if (po != null)
+                        {
+                            newOrderInfo.Products.Add(po);
+                        }
+                        
                         return newOrderInfo;
                     },
                     new 
@@ -96,7 +107,7 @@ namespace  WebStore.DB.Storages
                     },
                     commandType: CommandType.StoredProcedure,
                     splitOn: "Id");
-                return result.ToList();
+                return result.Distinct().ToList();
             }
             catch (SqlException ex)
             {

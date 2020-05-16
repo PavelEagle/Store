@@ -18,7 +18,7 @@ namespace WebStore.API.Controllers
             _mapper = mapper;
         }
         [HttpGet("{orderId}")]
-        public async ValueTask<ActionResult<OrderInfoOutputModel>> GetProductById(int orderId)
+        public async ValueTask<ActionResult<OrderInfoOutputModel>> GetOrderById(int orderId)
         {
             if (orderId < 1) return BadRequest("Enter currect orderId");
             var result = await _orderRepository.OrderGetById(orderId);

@@ -6,6 +6,6 @@ namespace WebStore.API.Controllers
 {
     public interface IOrderController
     {
-        ValueTask<ActionResult<OrderInfoOutputModel>> GetProductById(int orderId);
+        ValueTask<ActionResult<OrderInfoOutputModel>> GetOrderById(int orderId);
     }
 }

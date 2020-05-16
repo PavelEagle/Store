@@ -15,18 +15,18 @@ namespace WebStore.Repository.Repositories
             _orderStorage = orderStorage;
         }
 
-        public async ValueTask<RequestResult<OrderInfo>> OrderGetById(int productId)
+        public async ValueTask<RequestResult<OrderInfo>> OrderGetById(int orderId)
         {
             var result = new RequestResult<OrderInfo>();
             try
             {
-                result.RequestData = await _orderStorage.OrderGetById(productId);
+                result.RequestData = await _orderStorage.OrderGetById(orderId);
 
                 decimal currencyExchangeRate;
                 switch (result.RequestData.Store.City.Id)
                 {
                     case (int)CityEnum.Minsk:
-                        currencyExchangeRate = CurrencyRates.ActualCurrencyRates.Find(item=>item.Code == "BYN").Rate;
+                        currencyExchangeRate = CurrencyRates.ActualCurrencyRates.Find(item => item.Code == "BYN").Rate;
                         break;
                     case (int)CityEnum.Kiev:
                         currencyExchangeRate = CurrencyRates.ActualCurrencyRates.Find(item => item.Code == "UAH").Rate;
@@ -36,8 +36,8 @@ namespace WebStore.Repository.Repositories
                         break;
                 }
 
-                result.RequestData.Total = Math.Round(result.RequestData.Total / currencyExchangeRate);
-                result.RequestData.Product.Price = Math.Round(result.RequestData.Product.Price / currencyExchangeRate);
+                //result.RequestData.Total = Math.Round(result.RequestData.Total / currencyExchangeRate);
+                //result.RequestData.Product.Price = Math.Round(result.RequestData.Product.Price / currencyExchangeRate);
 
                 result.IsOkay = true;
             }

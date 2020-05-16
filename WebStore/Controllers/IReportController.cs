@@ -9,7 +9,7 @@ namespace WebStore.API.Controllers
     {
         ValueTask<ActionResult<ProductInStoreOutputModel>> GetBestSellingProducts();
         ValueTask<ActionResult<CountProductInCategoryOutputModel>> GetCategoryWithFiveAndMoreProducts();
-        ValueTask<ActionResult<OrderInfoOutputModel>> GetInfoAboutOrdersByDate(string startDate, string EndDate);
+        ValueTask<ActionResult<List<List<OrderInfoOutputModel>>>> GetInfoAboutOrdersByDate(string startDate, string EndDate);
         ValueTask<ActionResult<List<MoneyInCityOutputModel>>> GetMoneyInEachCity();
         ValueTask<ActionResult<ShortProductOutputModel>> GetNoOrderedProducts();
         ValueTask<ActionResult<List<ProductInStoreOutputModel>>> GetProductsInWarehouseAndAbsentInMskAndSpb();

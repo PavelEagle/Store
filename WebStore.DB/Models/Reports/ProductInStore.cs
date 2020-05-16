@@ -1,4 +1,4 @@
-﻿namespace WebStore.DB.Models.Reports
+﻿namespace WebStore.DB.Models
 {
     public class ProductInStore : Product
     {

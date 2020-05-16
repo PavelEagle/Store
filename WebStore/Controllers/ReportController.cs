@@ -31,7 +31,7 @@ namespace WebStore.API.Controllers
         }
 
         [HttpGet("info-about-orders-by-date/{startDate}/{EndDate}")]
-        public async ValueTask<ActionResult<OrderInfoOutputModel>> GetInfoAboutOrdersByDate(string startDate, string EndDate)
+        public async ValueTask<ActionResult<List<List<OrderInfoOutputModel>>>> GetInfoAboutOrdersByDate(string startDate, string EndDate)
         {
             var result = await _reportRepository.GetInfoAboutOrdersByDate(startDate, EndDate);
             if (result.IsOkay)

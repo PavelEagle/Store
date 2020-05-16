@@ -1,15 +1,10 @@
-﻿using System;
+﻿using System.Collections.Generic;
 
 namespace WebStore.DB.Models
 {
     public class OrderInfo: Order
     {
-        public Product Product{ get; set; }
-        public int Quantity { get; set; }
-        public decimal Total { get; set; }
-        public int OrderId { get; set; }
-        public double CurrencyExchangeRate { get; set; }
-
-
+        public long OrderId { get; set; }
+        public List<Product_Order> Products { get; set; }
     }
 }

@@ -2,7 +2,6 @@
 using WebStore.API.Models.InputModels;
 using WebStore.API.Models.OutputModels;
 using WebStore.DB.Models;
-using WebStore.DB.Models.Reports;
 
 namespace WebStore.API.Configuration
 {
@@ -24,10 +23,7 @@ namespace WebStore.API.Configuration
                 .ForMember(dest => dest.Address, opt => opt.MapFrom(src => src.Store.Address));
             CreateMap<OrderInfo, OrderInfoOutputModel>()
                 .ForMember(dest => dest.City, opt => opt.MapFrom(src => src.Store.City.Name))
-                .ForMember(dest => dest.Address, opt => opt.MapFrom(src => src.Store.Address))
-                .ForMember(dest => dest.Manufacturer, opt => opt.MapFrom(src => src.Product.Manufacturer))
-                .ForMember(dest => dest.Model, opt => opt.MapFrom(src => src.Product.Model))
-                .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Product.Price))
+                .ForMember(dest => dest.StoreAddress, opt => opt.MapFrom(src => src.Store.Address))
                 .ForMember(dest => dest.Date, opt => opt.MapFrom(src => src.Date.ToString("dd/MM/yyyy")));
             CreateMap<City, MoneyInCityOutputModel>()
                 .ForMember(dest => dest.City, opt => opt.MapFrom(src => src.Name))

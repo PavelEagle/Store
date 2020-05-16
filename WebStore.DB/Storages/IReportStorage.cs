@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using WebStore.DB.Models;
-using WebStore.DB.Models.Reports;
 
 namespace WebStore.DB.Storages
 {

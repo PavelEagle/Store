@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using Microsoft.Extensions.Options;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -27,21 +28,35 @@ namespace WebStore.DB.Storages
         {
             try
             {
-                var result = await connection.QueryAsync<City, Store, Product, OrderInfo, OrderInfo>(
+                var orderDictionary = new Dictionary<int, OrderInfo>();
+
+                var result = await connection.QueryAsync<OrderInfo, City, Store, Product_Order, OrderInfo>(
                     SpName.OrderGetById,
-                    (city, store, product, orderinfo) =>
+                    (orderInfo, city, store, po) =>
                     {
-                        OrderInfo newOrderInfo = orderinfo;
-                        orderinfo.Store = store;
-                        store.City = city;
-                        newOrderInfo.Product = product;
+                        if (!orderDictionary.TryGetValue((int)orderInfo.OrderId, out OrderInfo newOrderInfo))
+                        {
+                            newOrderInfo = orderInfo;
+                            newOrderInfo.Store = store;
+                            newOrderInfo.Store.City = city;
+                            newOrderInfo.Products = new List<Product_Order>();
+                            orderDictionary.Add((int)orderInfo.OrderId, newOrderInfo);
+                        }
+
+                        if (po != null)
+                        {
+                            newOrderInfo.Products.Add(po);
+                        }
+
                         return newOrderInfo;
                     },
-                    new { orderId },
-                    transaction: transaction,
+                    new
+                    {
+                        orderId
+                    },
                     commandType: CommandType.StoredProcedure,
-                    splitOn: "Id");
-                return result.FirstOrDefault();
+                    splitOn: "Id");;
+                return result.Distinct().ToList().FirstOrDefault();
             }
             catch (SqlException ex)
             {
@@ -51,29 +66,29 @@ namespace WebStore.DB.Storages
 
         public async ValueTask<OrderInfo> OrderInser(OrderInfo order)
         {
-            try
-            {
-                var result = await connection.QueryAsync<long>(
-                    SpName.OrderInsert,
-                    new
-                    {
-                        StoreId = order.Store.Id,
-                        ProductId = order.Product.Id,
-                        order.Quantity,
-                        order.OrderAddress,
-                        order.CurrencyExchangeRate
-                    },
-                    transaction: transaction,
-                    commandType: CommandType.StoredProcedure);
-                order.Id = (int)result.FirstOrDefault();
+            return new OrderInfo();
+            //    try
+            //    {
+            //        var result = await connection.QueryAsync<long>(
+            //            SpName.OrderInsert,
+            //            new
+            //            {
+            //                StoreId = order.Store.Id,
+            //                //ProductId = order.Product.Id,
+            //                //order.Quantity,
+            //                //order.OrderAddress,
+            //                //order.CurrencyExchangeRate
+            //            },
+            //            transaction: transaction,
+            //            commandType: CommandType.StoredProcedure);
+            //        order.Id = (int)result.FirstOrDefault();
 
-                return await OrderGetById((int)order.Id);
-            }
-            catch (SqlException ex)
-            {
-                throw ex;
-            }
+            //        return await OrderGetById((int)order.Id);
+            //    }
+            //    catch (SqlException ex)
+            //    {
+            //        throw ex;
+            //    }
         }
     }
-
 }
