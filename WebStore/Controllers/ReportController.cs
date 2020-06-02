@@ -9,7 +9,7 @@ namespace WebStore.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ReportController : ControllerBase, IReportController
+    public class ReportController : ControllerBase
     {
         private readonly IMapper _mapper;
         private readonly IReportRepository _reportRepository;

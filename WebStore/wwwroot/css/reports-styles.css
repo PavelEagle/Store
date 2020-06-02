@@ -26,6 +26,11 @@
         outline: none !important;
     }
 
+
+.navbar {
+    padding: 0;
+}
+
 .navbar-nav .dropdown-menu {
     position: absolute;
 }
@@ -76,6 +81,47 @@
             vertical-align: middle;
             flex-grow: 1;
         }
+
+.accordion {
+    background-color: var(--navabar-color);
+    color: #000000;
+    cursor: pointer;
+    padding-left: 25px;
+    width: 100%;
+    height: 40px;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 18px;
+    transition: 0.5s;
+    line-height: 40px;
+}
+
+    .active, .accordion:hover {
+        background-color: #607D8B;
+    }
+
+    .accordion:after {
+        content: '\002B';
+        color: #fff;
+        font-size: 18px;
+        font-weight: bold;
+        float: right;
+        margin-left: 5px;
+    }
+
+.active:after {
+    content: "\2212";
+}
+
+.panel {
+    padding: 0 18px;
+    color: #212121;
+    background-color: #E6E6E1;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+}
 
 
 

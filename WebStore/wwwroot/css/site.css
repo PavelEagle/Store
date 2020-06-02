@@ -51,6 +51,7 @@ a.navbar-brand {
 
 .search-btn:hover {
     color: var(--search-hover-color);
+    border-color: var(--search-hover-color);
 }
 
 

@@ -5,7 +5,7 @@ using WebStore.Models;
 
 namespace WebStore.Controllers
 {
-    public class HomeController : Controller, IHomeController
+    public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
 

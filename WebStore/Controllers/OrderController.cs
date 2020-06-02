@@ -8,7 +8,7 @@ namespace WebStore.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class OrderController : ControllerBase, IOrderController
+    public class OrderController : ControllerBase
     {
         private readonly IMapper _mapper;
         private readonly IOrderRepository _orderRepository;

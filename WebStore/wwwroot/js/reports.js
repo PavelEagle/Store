@@ -156,38 +156,34 @@
             });
 
         function CreateTable(reportModel) {
-            var strResult = "<table class='table'><thead><tr>" +
-                            "<th scope='col'>OrderId</th>" +
-                            "<th scope='col'>City</th>" +
-                            "<th scope='col'>Address</th>" +
+
+            let length = reportModel.length > 100 ? 100 : reportModel.length;
+
+            var strResult = "";
+            for (let i = 0; i < length; i++) {
+                strResult += "<div class='accordion'>OrderId: " + reportModel[i].orderId + "</div>" +
+                            "<div class='panel'><table class='table'><thead><tr>" +
                             "<th scope='col'>Manufacturer</th>" +
                             "<th scope='col'>Model</th>" +
                             "<th scope='col'>Price</th>" +
                             "<th scope='col'>Quantity</th>" +
                             "<th scope='col'>Total, RUB</th>" +
-                            "<th scope='col'>Order Address</th>" +
-                            "<th scope='col'>Date</th>" +
                             "</tr></thead><tbody>";
 
-            let length = reportModel.length > 100 ? 100 : reportModel.length;
-
-            for (let i = 0; i < length; i++) {
-                strResult += "<tr><td scope='row'>" + reportModel[i].orderId +
-                             "</td><td>" + reportModel[i].city +
-                             "</td><td>" + reportModel[i].address +
-                             "</td><td>" + reportModel[i].manufacturer +
-                             "</td><td>" + reportModel[i].model +
-                             "</td><td>" + reportModel[i].price +
-                             "</td><td>" + reportModel[i].quantity +
-                             "</td><td>" + reportModel[i].total +
-                             "</td><td>" + reportModel[i].orderAddress +
-                             "</td><td>" + reportModel[i].date +
-                             "</td>";
+                for (let j = 0; j < reportModel[i].products.length; j++) {
+                    strResult += "<tr><td scope='row'>" + reportModel[i].products[j].manufacturer +
+                        "</td><td>" + reportModel[i].products[j].model +
+                        "</td><td>" + reportModel[i].products[j].price +
+                        "</td><td>" + reportModel[i].products[j].quantity +
+                        "</td><td>" + reportModel[i].products[j].total +
+                        "</td>";
                 }
-                strResult += "</tbody></table>";
+                strResult += "</tbody></table></div>";
+            }        
 
             document.getElementById('data-viewer').innerHTML = strResult;
             document.getElementById('report-info').innerHTML = "Orders by date";
+            accordion(); //accordion.js
         }
 
         function FormateDate(date) {
