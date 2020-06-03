@@ -159,9 +159,23 @@
 
             let length = reportModel.length > 100 ? 100 : reportModel.length;
 
+            let lastOrders = reportModel.slice(0, length).sort((a, b) => {
+                let datePartsA = a.date.split('.');
+                let datePartsB = b.date.split('.');
+                let dateA = new Date(datePartsA[2], datePartsA[1] - 1, datePartsA[0]);
+                let dateB = new Date(datePartsB[2], datePartsB[1] - 1, datePartsB[0]);
+
+                return dateB - dateA;
+            });
+                
+            console.log(lastOrders);
+
             var strResult = "";
             for (let i = 0; i < length; i++) {
-                strResult += "<div class='accordion'>OrderId: " + reportModel[i].orderId + "</div>" +
+                strResult += "<div class='accordion'><B>Date:</B> " + lastOrders[i].date +
+                            ", <B>Store:</B> " + lastOrders[i].city +
+                            ", " + lastOrders[i].storeAddress +
+                            "</div>" +
                             "<div class='panel'><table class='table'><thead><tr>" +
                             "<th scope='col'>Manufacturer</th>" +
                             "<th scope='col'>Model</th>" +
@@ -170,12 +184,12 @@
                             "<th scope='col'>Total, RUB</th>" +
                             "</tr></thead><tbody>";
 
-                for (let j = 0; j < reportModel[i].products.length; j++) {
-                    strResult += "<tr><td scope='row'>" + reportModel[i].products[j].manufacturer +
-                        "</td><td>" + reportModel[i].products[j].model +
-                        "</td><td>" + reportModel[i].products[j].price +
-                        "</td><td>" + reportModel[i].products[j].quantity +
-                        "</td><td>" + reportModel[i].products[j].total +
+                for (let j = 0; j < lastOrders[i].products.length; j++) {
+                    strResult += "<tr><td scope='row'>" + lastOrders[i].products[j].manufacturer +
+                        "</td><td>" + lastOrders[i].products[j].model +
+                        "</td><td>" + lastOrders[i].products[j].price +
+                        "</td><td>" + lastOrders[i].products[j].quantity +
+                        "</td><td>" + lastOrders[i].products[j].total +
                         "</td>";
                 }
                 strResult += "</tbody></table></div>";

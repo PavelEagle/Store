@@ -54,18 +54,20 @@
     margin-bottom: 15px;
 }
 
-    #start-date, #end-date{
-        margin: 0 5px 0px 5px;
-        height: 28px;
-        border-radius: 0.25rem;
-    }
+#start-date, #end-date {
+    margin: 0 5px 0px 5px;
+    height: 28px;
+    border-radius: 0.25rem;
+    border-color: var(--border-color);
+}
 
-    #order-by-date-btn {
-        font-size: 16px;
-        line-height: 10px;
-        height: 28px;
-        border-radius: 0.25rem;
-    }
+#order-by-date-btn {
+    font-size: 16px;
+    line-height: 10px;
+    height: 28px;
+    border-radius: 0.25rem;
+    border-color: var(--border-color);
+}
 
 
 
@@ -98,7 +100,7 @@
 }
 
     .active, .accordion:hover {
-        background-color: #607D8B;
+        background-color: #a1a19d;
     }
 
     .accordion:after {
