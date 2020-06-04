@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using System;
+using System.Globalization;
 using WebStore.API.Models.InputModels;
 using WebStore.API.Models.OutputModels;
 using WebStore.DB.Models;
@@ -31,6 +33,10 @@ namespace WebStore.API.Configuration
             CreateMap<Category, CountProductInCategoryOutputModel>()
                  .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.Name));
             CreateMap<SalesByWorldAndRF, SalesByWorldAndRFOutputModel> ();
+            CreateMap<InputDateModel, DateModel>()
+                .ForMember(dest => dest.startDate, opt => opt.MapFrom(src => DateTime.ParseExact(src.startDate, "ddMMyyyy", CultureInfo.InvariantCulture)))
+                .ForMember(dest => dest.endDate, opt => opt.MapFrom(src => DateTime.ParseExact(src.endDate, "ddMMyyyy", CultureInfo.InvariantCulture)));
         }
     }
 }
+

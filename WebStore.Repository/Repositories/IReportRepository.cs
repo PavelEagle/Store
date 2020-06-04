@@ -9,7 +9,7 @@ namespace WebStore.Repository.Repositories
     {
         ValueTask<RequestResult<List<ProductInStore>>> GetBestSellingProducts();
         ValueTask<RequestResult<List<Category>>> GetCategoryWithFiveAndMoreProducts();
-        ValueTask<RequestResult<List<OrderInfo>>> GetInfoAboutOrdersByDate(string startDate, string endDate);
+        ValueTask<RequestResult<List<OrderInfo>>> GetInfoAboutOrdersByDate(DateModel dateModel);
         ValueTask<RequestResult<List<City>>> GetMoneyInEachCity();
         ValueTask<RequestResult<List<Product>>> GetNoOrderedProducts();
         ValueTask<RequestResult<List<ProductInStore>>> GetProductsInWarehouseAndAbsentInMskAndSpb();

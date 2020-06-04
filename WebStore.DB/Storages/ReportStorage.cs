@@ -33,176 +33,115 @@ namespace  WebStore.DB.Storages
 
         public async ValueTask<List<City>> GetMoneyInEachCity()
         {
-            try
-            {
-                var result = await connection.QueryAsync<City>(
-                    SpName.GetMoneyInEachCity,
-                    null,
-                    commandType: CommandType.StoredProcedure);
-                return result.ToList();
-            }
-            catch (SqlException ex)
-            {
-                throw ex;
-            }
+            var result = await connection.QueryAsync<City>(
+                SpName.GetMoneyInEachCity,
+                null,
+                commandType: CommandType.StoredProcedure);
+            return result.ToList();
         }
 
         public async ValueTask<List<ProductInStore>> GetBestSellingProducts()
         {
-            try
+            var result = await connection.QueryAsync<City, Store, ProductInStore, ProductInStore>(
+            SpName.GetBestSellingProducts,
+            (city, store, bsproduct) =>
             {
-                var result = await connection.QueryAsync<City, Store, ProductInStore, ProductInStore>(
-                    SpName.GetBestSellingProducts,
-                    (city, store, bsproduct) =>
-                    {
-                        ProductInStore newProduct = bsproduct;
-                        newProduct.Store = store;
-                        store.City = city;
-                        return newProduct;
-                    },
-                    null,
-                    commandType: CommandType.StoredProcedure,
-                    splitOn: "Id");
-                return result.ToList();
-            }
-            catch (SqlException ex)
-            {
-                throw ex;
-            }
+                ProductInStore newProduct = bsproduct;
+                newProduct.Store = store;
+                store.City = city;
+                return newProduct;
+            },
+            null,
+            commandType: CommandType.StoredProcedure,
+            splitOn: "Id");
+            return result.ToList();
         }
 
-        public async ValueTask<List<OrderInfo>> GetInfoAboutOrdersByDate(string startDate, string endDate)
+        public async ValueTask<List<OrderInfo>> GetInfoAboutOrdersByDate(DateModel dateModel)
         {
+            var orderDictionary = new Dictionary<int, OrderInfo>();
 
-            DateTime formatedStartDate = DateTime.ParseExact(startDate, "ddMMyyyy", CultureInfo.InvariantCulture);
-            DateTime formatedEndDate = DateTime.ParseExact(endDate, "ddMMyyyy", CultureInfo.InvariantCulture);
-            try
-            {
-                var orderDictionary = new Dictionary<int, OrderInfo>();
-
-                var result = await connection.QueryAsync<OrderInfo, City, Store, Product_Order, OrderInfo>(
-                    SpName.GetInfoAboutOrdersByDate,
-                    (orderInfo, city, store, po) =>
+            var result = await connection.QueryAsync<OrderInfo, City, Store, Product_Order, OrderInfo>(
+                SpName.GetInfoAboutOrdersByDate,
+                (orderInfo, city, store, po) =>
+                {
+                    if (!orderDictionary.TryGetValue((int)orderInfo.OrderId, out OrderInfo newOrderInfo))
                     {
-                        if (!orderDictionary.TryGetValue((int)orderInfo.OrderId, out OrderInfo newOrderInfo))
-                        {
-                            newOrderInfo = orderInfo;
-                            newOrderInfo.Store = store;
-                            newOrderInfo.Store.City = city;
-                            newOrderInfo.Products = new List<Product_Order>();
-                            orderDictionary.Add((int)orderInfo.OrderId, newOrderInfo);
-                        }
+                        newOrderInfo = orderInfo;
+                        newOrderInfo.Store = store;
+                        newOrderInfo.Store.City = city;
+                        newOrderInfo.Products = new List<Product_Order>();
+                        orderDictionary.Add((int)orderInfo.OrderId, newOrderInfo);
+                    }
 
-                        if (po != null)
-                        {
-                            newOrderInfo.Products.Add(po);
-                        }
+                    if (po != null)
+                    {
+                        newOrderInfo.Products.Add(po);
+                    }
                         
-                        return newOrderInfo;
-                    },
-                    new 
-                    { 
-                        startDate = formatedStartDate,
-                        endDate = formatedEndDate 
-                    },
-                    commandType: CommandType.StoredProcedure,
-                    splitOn: "Id");
-                return result.Distinct().ToList();
-            }
-            catch (SqlException ex)
-            {
-                throw ex;
-            }
+                    return newOrderInfo;
+                },
+                new 
+                { 
+                    dateModel.startDate,
+                    dateModel.endDate
+                },
+                commandType: CommandType.StoredProcedure,
+                splitOn: "Id");
+            return result.Distinct().ToList();
         }
 
         public async ValueTask<List<ProductInStore>> GetProductsInWarehouseAndAbsentInMskAndSpb()
         {
-            try
-            {
-                var result = await connection.QueryAsync<ProductInStore, City, Store, ProductInStore>(
-                    SpName.GetProductsInWarehouseAndAbsentInMskAndSpb,
-                    (bsproduct, city, store) =>
-                    {
-                        ProductInStore newProduct = bsproduct;
-                        newProduct.Store = store;
-                        store.City = city;
-                        return newProduct;
-                    },
-                    null,
-                    commandType: CommandType.StoredProcedure,
-                    splitOn: "Id");
-                return result.ToList();
-            }
-            catch (SqlException ex)
-            {
-                throw ex;
-            }
+            var result = await connection.QueryAsync<ProductInStore, City, Store, ProductInStore>(
+                SpName.GetProductsInWarehouseAndAbsentInMskAndSpb,
+                (bsproduct, city, store) =>
+                {
+                    ProductInStore newProduct = bsproduct;
+                    newProduct.Store = store;
+                    store.City = city;
+                    return newProduct;
+                },
+                null,
+                commandType: CommandType.StoredProcedure,
+                splitOn: "Id");
+            return result.ToList();
         }
 
         public async ValueTask<List<Category>> GetCategoryWithFiveAndMoreProducts()
         {
-            try
-            {
-                var result = await connection.QueryAsync<Category>(
-                    SpName.GetCategoryWithFiveAndMoreProducts,
-                    null,
-                    commandType: CommandType.StoredProcedure);
-                return result.ToList();
-            }
-            catch (SqlException ex)
-            {
-                throw ex;
-            }
+            var result = await connection.QueryAsync<Category>(
+                SpName.GetCategoryWithFiveAndMoreProducts,
+                null,
+                commandType: CommandType.StoredProcedure);
+            return result.ToList();
         }
 
         public async ValueTask<List<Product>> GetNoOrderedProducts()
         {
-            try
-            {
-                var result = await connection.QueryAsync<Product>(
-                    SpName.GetNoOrderedProducts,
-                    null,
-                    commandType: CommandType.StoredProcedure);
-                return result.ToList();
-            }
-            catch (SqlException ex)
-            {
-                throw ex;
-            }
+            var result = await connection.QueryAsync<Product>(
+                SpName.GetNoOrderedProducts,
+                null,
+                commandType: CommandType.StoredProcedure);
+            return result.ToList();
         }
 
         public async ValueTask<List<Product>> GetSoldOutProduct()
         {
-            try
-            {
-                var result = await connection.QueryAsync<Product>(
-                    SpName.GetSoldOutProduct,
-                    null,
-                    commandType: CommandType.StoredProcedure);
-                return result.ToList();
-            }
-            catch (SqlException ex)
-            {
-                throw ex;
-            }
+            var result = await connection.QueryAsync<Product>(
+                SpName.GetSoldOutProduct,
+                null,
+                commandType: CommandType.StoredProcedure);
+            return result.ToList();
         }
 
         public async ValueTask<SalesByWorldAndRF> GetSalesByWorldAndRF()
         {
-            try
-            {
-                var result = await connection.QueryAsync<SalesByWorldAndRF>(
-                    SpName.GetSalesByWorldAndRF,
-                    null,
-                    commandType: CommandType.StoredProcedure);
-                return result.FirstOrDefault();
-            }
-            catch (SqlException ex)
-            {
-                throw ex;
-            }
+            var result = await connection.QueryAsync<SalesByWorldAndRF>(
+                SpName.GetSalesByWorldAndRF,
+                null,
+                commandType: CommandType.StoredProcedure);
+            return result.FirstOrDefault();
         }
-
-
     }
 }

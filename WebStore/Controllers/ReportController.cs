@@ -4,6 +4,8 @@ using WebStore.API.Models.OutputModels;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using WebStore.Repository.Repositories;
+using WebStore.API.Models.InputModels;
+using WebStore.DB.Models;
 
 namespace WebStore.API.Controllers
 {
@@ -31,9 +33,10 @@ namespace WebStore.API.Controllers
         }
 
         [HttpGet("info-about-orders-by-date/{startDate}/{EndDate}")]
-        public async ValueTask<ActionResult<List<List<OrderInfoOutputModel>>>> GetInfoAboutOrdersByDate(string startDate, string EndDate)
+        public async ValueTask<ActionResult<List<List<OrderInfoOutputModel>>>> GetInfoAboutOrdersByDate(string startDate, string endDate)
         {
-            var result = await _reportRepository.GetInfoAboutOrdersByDate(startDate, EndDate);
+            var dateModel = new InputDateModel() { startDate = startDate, endDate = endDate };
+            var result = await _reportRepository.GetInfoAboutOrdersByDate(_mapper.Map<DateModel>(dateModel));
             if (result.IsOkay)
             {
                 return Ok(_mapper.Map<List<OrderInfoOutputModel>>(result.RequestData));

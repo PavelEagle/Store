@@ -31,7 +31,6 @@ namespace WebStore.API.Controllers
                 return Ok(_mapper.Map<ProductOutputModel>(result.RequestData));
             }
             return Problem($"Something went wrong: {result.ExMessage}", statusCode: 520);
-
         }
 
         [HttpPost]
