@@ -172,6 +172,7 @@
 
             var strResult = "";
             for (let i = 0; i < length; i++) {
+                var totalAmount = 0;
                 strResult += "<div class='accordion'><B>Date:</B> " + lastOrders[i].date +
                             ", <B>Store:</B> " + lastOrders[i].city +
                             ", " + lastOrders[i].storeAddress +
@@ -191,9 +192,16 @@
                         "</td><td>" + lastOrders[i].products[j].quantity +
                         "</td><td>" + lastOrders[i].products[j].total +
                         "</td>";
+                    totalAmount += lastOrders[i].products[j].total;
                 }
-                strResult += "</tbody></table></div>";
-            }        
+
+                strResult += "<tr class='total-amount'><td scope='row'><b>Total Amount: </b>" +
+                    "</td><td>" +
+                    "</td><td>" +
+                    "</td><td>" + 
+                    "</td><td>" + totalAmount +
+                    "</td></table></div>";            
+            }    
 
             document.getElementById('data-viewer').innerHTML = strResult;
             document.getElementById('report-info').innerHTML = "Orders by date";
