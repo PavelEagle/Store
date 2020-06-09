@@ -26,11 +26,11 @@
 
     function GetProductInStore(method) {
         HideCalendar();
-        let url;
+        let url = "https://localhost:5001/api/report/";
         switch (method) {
-            case "best-selling": url = "https://localhost:5001/api/report/best-selling-products";
+            case "best-selling": url += "best-selling-products";
                 break;
-            case "in-warehouse-absent-msc-spb": url = "https://localhost:5001/api/report/products-in-warehouse-and-absent-in-msk-and-spb";
+            case "in-warehouse-absent-msc-spb": url += "products-in-warehouse-and-absent-in-msk-and-spb";
                 break;
         }
         fetch(url)
@@ -103,11 +103,11 @@
 
     function GetProduct(method) {
         HideCalendar()
-        let url;
+        let url = "https://localhost:5001/api/report/";
         switch (method) {
-            case "sold-out": url = "https://localhost:5001/api/report/sold-out-products";
+            case "sold-out": url += "sold-out-products";
                 break;
-            case "no-ordered": url = "https://localhost:5001/api/report/no-ordered-products";
+            case "no-ordered": url += "no-ordered-products";
                 break;
         }
         fetch(url)
