@@ -1,16 +1,40 @@
 ﻿window.onload = function () {
+    let data;
+    let isSorted = false;
+    
     function GetMoneyInCity() {
+        console.log(isSorted);
         HideCalendar();
         fetch('https://localhost:5001/api/report/money-in-city')
             .then((response) => response.json())
-            .then((data) => {
+            .then((dt) => {
+                data = dt;
                 CreateTable(data);
+                document.getElementsByClassName('city-sort')[0].addEventListener("click", () => citySort());
             });
+
+       
+        function citySort() {
+            data = data.sort((a, b) => (a.city > b.city) ? 1 : (b.city > a.city) ? -1 : 0);
+            console.log(data);
+            console.log(isSorted);
+            if (!isSorted) {
+                CreateTable(data);
+                isSorted = true;
+            }
+            else if (isSorted){
+                data = data.sort((a, b) => (a.city < b.city) ? 1 : (b.city < a.city) ? -1 : 0);
+                console.log(data);
+                CreateTable(data);
+                isSorted = false;
+            }
+        }
+
 
         function CreateTable(reportModel) {
             var strResult = "<table class='table'><thead><tr>" + 
-                            "<th scope='col' >City</th>" +
-                            "<th scope='col'>Total Money, RUB</th>" +
+                            "<th scope='col'><a class = 'city-sort' href='#'>City</a></th>" +
+                            "<th scope='col'><a class = 'total-money-sort' href='#'>Total Money, RUB</a></th>" +
                             "</tr></thead><tbody>";
             reportModel.forEach(x => {
                 strResult += "<tr><th scope='row'>" + x.city +
@@ -18,6 +42,8 @@
                              "</td></tr>";
             });
             strResult += "</tbody></table>";
+
+            //document.getElementsByClassName('city-sort')[0].addEventListener("click", () => citySort(reportModel));
 
             document.getElementById('data-viewer').innerHTML = strResult;
             document.getElementById('report-info').innerHTML = "Money In City";
@@ -45,11 +71,11 @@
         function CreateTable(reportModel) {
             console.log(reportModel.length);
             var strResult = "<table class='table'><thead><tr>" +
-                            "<th scope='col'>City</th>" +
-                            "<th scope='col'>Address</th>" +
-                            "<th scope='col'>Manufacturer</th>" +
-                            "<th scope='col'>Model</th>" +
-                            "<th scope='col'>Price, RUB</th>" +
+                            "<th scope='col'><a class = 'city-sort' href='#'>City</a></th>" +
+                            "<th scope='col'><a class = 'address-sort' href='#'>Address</a></th>" +
+                            "<th scope='col'><a class = 'manufacturer-sort' href='#'>Manufacturer</a></th>" +
+                            "<th scope='col'><a class = 'model-sort' href='#'>Model</a></th>" +
+                            "<th scope='col'><a class = 'price-sort' href='#'>Price, RUB</a></th>" +
                             "</tr></thead><tbody>";
 
             let length = reportModel.length > 100 ? 100 : reportModel.length;
@@ -86,8 +112,8 @@
 
         function CreateTable(reportModel) {
             var strResult = "<table class='table'><thead><tr>" +
-                            "<th scope='col'>Category</th>" +
-                            "<th scope='col'>Count of Product</th>" +
+                            "<th scope='col'><a class = 'category-sort' href='#'>Category</a></th>" +
+                            "<th scope='col'><a class = 'count-of-products-sort' href='#'>Count of Products</a></th>" +
                             "</tr></thead><tbody>";
             reportModel.forEach(x => {
                 strResult +="<tr><th scope='row'>" + x.category +
@@ -118,9 +144,9 @@
 
         function CreateTable(reportModel) {
             var strResult = "<table class='table'><thead><tr>" +
-                            "<th scope='col'>Manufacturer</th>" +
-                            "<th scope='col'>Model</th>" +
-                            "<th scope='col'>Price, RUB</th>" +
+                            "<th scope='col'><a class = 'manufacturer-sort' href='#'>Manufacturer</a></th>" +
+                            "<th scope='col'><a class = 'model-sort' href='#'>Model</a></th>" +
+                            "<th scope='col'><a class = 'price-sort' href='#'>Price, RUB</a></th>" +
                             "</tr></thead><tbody>";
 
             let length = reportModel.length > 100 ? 100 : reportModel.length;
@@ -167,8 +193,6 @@
 
                 return dateB - dateA;
             });
-                
-            console.log(lastOrders);
 
             var strResult = "";
             for (let i = 0; i < length; i++) {
@@ -178,11 +202,11 @@
                             ", " + lastOrders[i].storeAddress +
                             "</div>" +
                             "<div class='panel'><table class='table'><thead><tr>" +
-                            "<th scope='col'>Manufacturer</th>" +
-                            "<th scope='col'>Model</th>" +
-                            "<th scope='col'>Price</th>" +
-                            "<th scope='col'>Quantity</th>" +
-                            "<th scope='col'>Total, RUB</th>" +
+                            "<th scope='col'><a class = 'manufacturer-sort' href='#'>Manufacturer</a></th>" +
+                            "<th scope='col'><a class = 'model-sort' href='#'>Model</a></th>" +
+                            "<th scope='col'><a class = 'price-sort' href='#'>Price</a></th>" +
+                            "<th scope='col'><a class = 'quantity-sort' href='#'>Quantity</a></th>" +
+                            "<th scope='col'><a class = 'total-price-sort' href='#'>Total, RUB</a></th>" +
                             "</tr></thead><tbody>";
 
                 for (let j = 0; j < lastOrders[i].products.length; j++) {
