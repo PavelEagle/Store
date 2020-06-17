@@ -81,7 +81,7 @@ namespace WebStore
 
             app.UseAuthorization();
 
-            GetCurrencyExchangeRate.GetRates();
+            //GetCurrencyExchangeRate.GetRates();
 
             app.UseEndpoints(endpoints =>
             {
