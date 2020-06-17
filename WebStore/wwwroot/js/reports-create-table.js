@@ -12,7 +12,6 @@
         strResult += "</tbody></table>";
 
         document.getElementById('data-viewer').innerHTML = strResult;
-        document.getElementById('report-info').innerHTML = "Money In City";
     },
     getProductInStoreCreateTable: function (reportModel) {
         let strResult = "<table class='table'><thead><tr>" +
@@ -36,12 +35,6 @@
         strResult += "</tbody></table>";
 
         document.getElementById('data-viewer').innerHTML = strResult;
-        switch (method) {
-            case "best-selling": document.getElementById('report-info').innerHTML = "Best selling";
-                break;
-            case "in-warehouse-absent-msc-spb": document.getElementById('report-info').innerHTML = "In stock in warehouse, absent in Msc and Spb";
-                break;
-        }
     },
     getCategoryCreateTable: function (reportModel) {
         let strResult = "<table class='table'><thead><tr>" +
@@ -56,7 +49,6 @@
         strResult += "</tbody></table>";
 
         document.getElementById('data-viewer').innerHTML = strResult;
-        document.getElementById('report-info').innerHTML = "Category with 5 and more products";
     },
     getProductCreateTable: function (reportModel) {
         let strResult = "<table class='table'><thead><tr>" +
@@ -76,12 +68,6 @@
         strResult += "</tbody></table>";
 
         document.getElementById('data-viewer').innerHTML = strResult;
-        switch (method) {
-            case "sold-out": document.getElementById('report-info').innerHTML = "Sold out products";
-                break;
-            case "no-ordered": document.getElementById('report-info').innerHTML = "No ordered products";
-                break;
-        }
     },
     getOrdersByDateCreateTable: function (reportModel) {
         let length = reportModel.length > 100 ? 100 : reportModel.length;
@@ -129,8 +115,7 @@
         }
 
         document.getElementById('data-viewer').innerHTML = strResult;
-        document.getElementById('report-info').innerHTML = "Orders by date";
-        accordion(); //accordion.js
+        accordion(); //site.js
     },
     GetSalesByWorldAndRFCreateTable: function (reportModel) {
         let strResult = "<table class='table'><thead><tr>" +
@@ -142,6 +127,5 @@
             "</td></tbody></table>";
 
         document.getElementById('data-viewer').innerHTML = strResult;
-        document.getElementById('report-info').innerHTML = "Sales By World And RF";
     }
 }

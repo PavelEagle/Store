@@ -8,6 +8,8 @@
                 reportCreateTableModule.getMoneyInCityCreateTable(data);
                 //document.getElementsByClassName('city-sort')[0].addEventListener("click", () => citySort());
             });
+
+        document.getElementById('report-info').innerHTML = "Money In City";
     },
     getProductInStore: function (method) {
         reportsAnimate.hideCalendar();
@@ -23,6 +25,13 @@
             .then((data) => {
                 reportCreateTableModule.getProductInStoreCreateTable(data);
             });
+
+        switch (method) {
+            case "best-selling": document.getElementById('report-info').innerHTML = "Best selling";
+                break;
+            case "in-warehouse-absent-msc-spb": document.getElementById('report-info').innerHTML = "In stock in warehouse, absent in Msc and Spb";
+                break;
+        }
     },
     getCategoryWithFiveAndMoreProducts: function() {
         reportsAnimate.hideCalendar();
@@ -31,6 +40,8 @@
             .then((data) => {
                 reportCreateTableModule.getCategoryCreateTable(data);
             });
+
+        document.getElementById('report-info').innerHTML = "Category with 5 and more products";
     },
     getProduct: function (method) {
         reportsAnimate.hideCalendar();
@@ -46,10 +57,17 @@
             .then((data) => {
                 reportCreateTableModule.getProductCreateTable(data);
             });
+
+        switch (method) {
+            case "sold-out": document.getElementById('report-info').innerHTML = "Sold out products";
+                break;
+            case "no-ordered": document.getElementById('report-info').innerHTML = "No ordered products";
+                break;
+        }
     },
     getOrdersByDate: async function () {
-        let startDateForUrl = FormateDate(this.document.getElementById("start-date").value);
-        let endDateForUrl = FormateDate(this.document.getElementById("end-date").value);
+        let startDateForUrl = FormateDate(document.getElementById("start-date").value);
+        let endDateForUrl = FormateDate(document.getElementById("end-date").value);
         let url = 'https://localhost:5001/api/report/info-about-orders-by-date/' + startDateForUrl + '/' + endDateForUrl;
 
         fetch(url)
@@ -61,6 +79,8 @@
         function FormateDate(date) {
             return date.substring(8, 10) + date.substring(5, 7) + date.substring(0, 4);
         }
+
+        document.getElementById('report-info').innerHTML = "Orders by date";
     },
     GetSalesByWorldAndRF: function () {
         reportsAnimate.hideCalendar();
@@ -69,6 +89,8 @@
             .then((data) => {
                 reportCreateTableModule.GetSalesByWorldAndRFCreateTable(data);
             });
+
+        document.getElementById('report-info').innerHTML = "Sales By World And RF";
     }
 }
 
