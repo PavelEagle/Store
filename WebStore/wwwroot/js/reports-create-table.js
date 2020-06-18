@@ -1,7 +1,7 @@
 ﻿let reportCreateTableModule = {
-    getMoneyInCityCreateTable: function (reportModel) {
+    moneyInCityCreateTable: function (reportModel) {
         let strResult = "<table class='table'><thead><tr>" +
-            "<th scope='col'><a class = 'city-sort' href='#'>City</a></th>" +
+            "<th scope='col'><button class = 'city-sort'>City</button></th>" +
             "<th scope='col'><a class = 'total-money-sort' href='#'>Total Money, RUB</a></th>" +
             "</tr></thead><tbody>";
         reportModel.forEach(x => {
@@ -13,9 +13,9 @@
 
         document.getElementById('data-viewer').innerHTML = strResult;
     },
-    getProductInStoreCreateTable: function (reportModel) {
+    productInStoreCreateTable: function (reportModel) {
         let strResult = "<table class='table'><thead><tr>" +
-            "<th scope='col'><a class = 'city-sort' href='#'>City</a></th>" +
+            "<th scope='col'><button class = 'city-sort'>City</button></th>" +
             "<th scope='col'><a class = 'address-sort' href='#'>Address</a></th>" +
             "<th scope='col'><a class = 'manufacturer-sort' href='#'>Manufacturer</a></th>" +
             "<th scope='col'><a class = 'model-sort' href='#'>Model</a></th>" +
@@ -36,7 +36,7 @@
 
         document.getElementById('data-viewer').innerHTML = strResult;
     },
-    getCategoryCreateTable: function (reportModel) {
+    categoryCreateTable: function (reportModel) {
         let strResult = "<table class='table'><thead><tr>" +
             "<th scope='col'><a class = 'category-sort' href='#'>Category</a></th>" +
             "<th scope='col'><a class = 'count-of-products-sort' href='#'>Count of Products</a></th>" +
@@ -50,7 +50,7 @@
 
         document.getElementById('data-viewer').innerHTML = strResult;
     },
-    getProductCreateTable: function (reportModel) {
+    productCreateTable: function (reportModel) {
         let strResult = "<table class='table'><thead><tr>" +
             "<th scope='col'><a class = 'manufacturer-sort' href='#'>Manufacturer</a></th>" +
             "<th scope='col'><a class = 'model-sort' href='#'>Model</a></th>" +
@@ -69,7 +69,7 @@
 
         document.getElementById('data-viewer').innerHTML = strResult;
     },
-    getOrdersByDateCreateTable: function (reportModel) {
+    ordersByDateCreateTable: function (reportModel) {
         let length = reportModel.length > 100 ? 100 : reportModel.length;
 
         let lastOrders = reportModel.slice(0, length).sort((a, b) => {
@@ -117,7 +117,7 @@
         document.getElementById('data-viewer').innerHTML = strResult;
         accordion(); //site.js
     },
-    GetSalesByWorldAndRFCreateTable: function (reportModel) {
+    salesByWorldAndRFCreateTable: function (reportModel) {
         let strResult = "<table class='table'><thead><tr>" +
             "<th scope='col'>Sales In RF, RUB</th>" +
             "<th scope='col'>Sales In The World, RUB</th>" +

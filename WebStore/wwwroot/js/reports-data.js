@@ -5,8 +5,8 @@
             .then((response) => response.json())
             .then((data) => {
                 //data = dt;
-                reportCreateTableModule.getMoneyInCityCreateTable(data);
-                //document.getElementsByClassName('city-sort')[0].addEventListener("click", () => citySort());
+                reportCreateTableModule.moneyInCityCreateTable(data);
+                document.getElementsByClassName('city-sort')[0].addEventListener("click", () => sortModule.methods.citySort(data));
             });
 
         document.getElementById('report-info').innerHTML = "Money In City";
@@ -23,7 +23,7 @@
         fetch(url)
             .then((response) => response.json())
             .then((data) => {
-                reportCreateTableModule.getProductInStoreCreateTable(data);
+                reportCreateTableModule.productInStoreCreateTable(data);
             });
 
         switch (method) {
@@ -38,7 +38,7 @@
         fetch('https://localhost:5001/api/report/category-with-five-and-more-products')
             .then((response) => response.json())
             .then((data) => {
-                reportCreateTableModule.getCategoryCreateTable(data);
+                reportCreateTableModule.categoryCreateTable(data);
             });
 
         document.getElementById('report-info').innerHTML = "Category with 5 and more products";
@@ -55,7 +55,7 @@
         fetch(url)
             .then((response) => response.json())
             .then((data) => {
-                reportCreateTableModule.getProductCreateTable(data);
+                reportCreateTableModule.productCreateTable(data);
             });
 
         switch (method) {
@@ -73,7 +73,7 @@
         fetch(url)
             .then((response) => response.json())
             .then((data) => {
-                reportCreateTableModule.getOrdersByDateCreateTable(data);
+                reportCreateTableModule.ordersByDateCreateTable(data);
             });
 
         function FormateDate(date) {
@@ -87,7 +87,7 @@
         fetch('https://localhost:5001/api/report/sales-by-world-and-rf')
             .then((response) => response.json())
             .then((data) => {
-                reportCreateTableModule.GetSalesByWorldAndRFCreateTable(data);
+                reportCreateTableModule.salesByWorldAndRFCreateTable(data);
             });
 
         document.getElementById('report-info').innerHTML = "Sales By World And RF";
