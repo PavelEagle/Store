@@ -6,7 +6,8 @@
             .then((data) => {
                 //data = dt;
                 reportCreateTableModule.moneyInCityCreateTable(data);
-                document.getElementsByClassName('city-sort')[0].addEventListener("click", () => sortModule.methods.citySort(data));
+                console.log(data);
+                document.getElementsByClassName('city-sort')[0].addEventListener("click", () => sortModule.citySort.citySortMethod());
             });
 
         document.getElementById('report-info').innerHTML = "Money In City";

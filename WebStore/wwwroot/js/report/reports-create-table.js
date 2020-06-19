@@ -5,8 +5,8 @@
             "<th scope='col'><a class = 'total-money-sort' href='#'>Total Money, RUB</a></th>" +
             "</tr></thead><tbody>";
         reportModel.forEach(x => {
-            strResult += "<tr><th scope='row'>" + x.city +
-                "</th><td> " + x.total +
+            strResult += "<tr><td scope='row'>" + x.city +
+                "</td><td> " + x.total +
                 "</td></tr>";
         });
         strResult += "</tbody></table>";
