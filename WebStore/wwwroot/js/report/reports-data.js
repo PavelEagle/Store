@@ -4,12 +4,10 @@
         fetch('https://localhost:5001/api/report/money-in-city')
             .then((response) => response.json())
             .then((data) => {
-                //data = dt;
                 reportCreateTableModule.moneyInCityCreateTable(data);
                 console.log(data);
-                document.getElementsByClassName('city-sort')[0].addEventListener("click", () => sortModule.citySort.citySortMethod());
             });
-
+        
         document.getElementById('report-info').innerHTML = "Money In City";
     },
     getProductInStore: function (method) {

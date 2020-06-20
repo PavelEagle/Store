@@ -129,6 +129,18 @@
     border-top: 2pt solid black;
 }
 
+.city-sort, .total-money-sort,.address-sort,.manufacturer-sort,.model-sort, 
+.price-sort, .category-sort, .count-of-products-sort, .quantity-sort,.total-price-sort {
+    user-select: none;
+}
+
+.city-sort:hover,.total-money-sort:hover,.address-sort:hover,.manufacturer-sort:hover,
+.model-sort:hover,.price-sort:hover,.category-sort:hover,.count-of-products-sort:hover,
+.quantity-sort:hover,.total-price-sort:hover {
+    cursor: pointer;
+}
+
+
 
 
 

@@ -1,8 +1,8 @@
 ﻿let reportCreateTableModule = {
     moneyInCityCreateTable: function (reportModel) {
         let strResult = "<table class='table'><thead><tr>" +
-            "<th scope='col'><button class = 'city-sort'>City</button></th>" +
-            "<th scope='col'><a class = 'total-money-sort' href='#'>Total Money, RUB</a></th>" +
+            "<th scope='col'><a class = 'city-sort'>City</a></th>" +
+            "<th scope='col'><a class = 'total-money-sort'>Total</a></th>" +
             "</tr></thead><tbody>";
         reportModel.forEach(x => {
             strResult += "<tr><td scope='row'>" + x.city +
@@ -12,14 +12,16 @@
         strResult += "</tbody></table>";
 
         document.getElementById('data-viewer').innerHTML = strResult;
+        document.getElementsByClassName('city-sort')[0].addEventListener("click", () => sortModule.sortReports.citySort('moneyInCity'));
+        document.getElementsByClassName('total-money-sort')[0].addEventListener("click", () => sortModule.sortReports.totalMoneySort('moneyInCity'));
     },
     productInStoreCreateTable: function (reportModel) {
         let strResult = "<table class='table'><thead><tr>" +
-            "<th scope='col'><button class = 'city-sort'>City</button></th>" +
-            "<th scope='col'><a class = 'address-sort' href='#'>Address</a></th>" +
-            "<th scope='col'><a class = 'manufacturer-sort' href='#'>Manufacturer</a></th>" +
-            "<th scope='col'><a class = 'model-sort' href='#'>Model</a></th>" +
-            "<th scope='col'><a class = 'price-sort' href='#'>Price, RUB</a></th>" +
+            "<th scope='col'><a class = 'city-sort'>City</a></th>" +
+            "<th scope='col'><a class = 'address-sort'>Address</a></th>" +
+            "<th scope='col'><a class = 'manufacturer-sort'>Manufacturer</a></th>" +
+            "<th scope='col'><a class = 'model-sort'>Model</a></th>" +
+            "<th scope='col'><a class = 'price-sort'>Price</a></th>" +
             "</tr></thead><tbody>";
 
         let length = reportModel.length > 100 ? 100 : reportModel.length;
@@ -35,11 +37,17 @@
         strResult += "</tbody></table>";
 
         document.getElementById('data-viewer').innerHTML = strResult;
+
+        document.getElementsByClassName('city-sort')[0].addEventListener("click", () => sortModule.sortReports.citySort('productInStore'));
+        document.getElementsByClassName('address-sort')[0].addEventListener("click", () => sortModule.sortReports.addressSort('productInStore'));
+        document.getElementsByClassName('manufacturer-sort')[0].addEventListener("click", () => sortModule.sortReports.manufacturerSort('productInStore'));
+        document.getElementsByClassName('model-sort')[0].addEventListener("click", () => sortModule.sortReports.modelSort('productInStore'));
+        document.getElementsByClassName('price-sort')[0].addEventListener("click", () => sortModule.sortReports.priceSort('productInStore'));
     },
     categoryCreateTable: function (reportModel) {
         let strResult = "<table class='table'><thead><tr>" +
-            "<th scope='col'><a class = 'category-sort' href='#'>Category</a></th>" +
-            "<th scope='col'><a class = 'count-of-products-sort' href='#'>Count of Products</a></th>" +
+            "<th scope='col'><a class = 'category-sort'>Category</a></th>" +
+            "<th scope='col'><a class = 'count-of-products-sort'>Count of Products</a></th>" +
             "</tr></thead><tbody>";
         reportModel.forEach(x => {
             strResult += "<tr><th scope='row'>" + x.category +
@@ -49,12 +57,15 @@
         strResult += "</tbody></table>";
 
         document.getElementById('data-viewer').innerHTML = strResult;
+
+        document.getElementsByClassName('category-sort')[0].addEventListener("click", () => sortModule.sortReports.citySort('category'));
+        document.getElementsByClassName('count-of-products-sort')[0].addEventListener("click", () => sortModule.sortReports.countProductSort('category'));
     },
     productCreateTable: function (reportModel) {
         let strResult = "<table class='table'><thead><tr>" +
-            "<th scope='col'><a class = 'manufacturer-sort' href='#'>Manufacturer</a></th>" +
-            "<th scope='col'><a class = 'model-sort' href='#'>Model</a></th>" +
-            "<th scope='col'><a class = 'price-sort' href='#'>Price, RUB</a></th>" +
+            "<th scope='col'><a class = 'manufacturer-sort'>Manufacturer</a></th>" +
+            "<th scope='col'><a class = 'model-sort'>Model</a></th>" +
+            "<th scope='col'><a class = 'price-sort'>Price</a></th>" +
             "</tr></thead><tbody>";
 
         let length = reportModel.length > 100 ? 100 : reportModel.length;
@@ -68,6 +79,10 @@
         strResult += "</tbody></table>";
 
         document.getElementById('data-viewer').innerHTML = strResult;
+
+        document.getElementsByClassName('manufacturer-sort')[0].addEventListener("click", () => sortModule.sortReports.manufacturerSort('product'));
+        document.getElementsByClassName('model-sort')[0].addEventListener("click", () => sortModule.sortReports.modelSort('product'));
+        document.getElementsByClassName('price-sort')[0].addEventListener("click", () => sortModule.sortReports.priceSort('product'));
     },
     ordersByDateCreateTable: function (reportModel) {
         let length = reportModel.length > 100 ? 100 : reportModel.length;
@@ -89,11 +104,11 @@
                 ", " + lastOrders[i].storeAddress +
                 "</div>" +
                 "<div class='panel'><table class='table'><thead><tr>" +
-                "<th scope='col'><a class = 'manufacturer-sort' href='#'>Manufacturer</a></th>" +
-                "<th scope='col'><a class = 'model-sort' href='#'>Model</a></th>" +
-                "<th scope='col'><a class = 'price-sort' href='#'>Price</a></th>" +
-                "<th scope='col'><a class = 'quantity-sort' href='#'>Quantity</a></th>" +
-                "<th scope='col'><a class = 'total-price-sort' href='#'>Total, RUB</a></th>" +
+                "<th scope='col'><a class = 'manufacturer-sort'>Manufacturer</a></th>" +
+                "<th scope='col'><a class = 'model-sort'>Model</a></th>" +
+                "<th scope='col'><a class = 'price-sort'>Price</a></th>" +
+                "<th scope='col'><a class = 'quantity-sort'>Quantity</a></th>" +
+                "<th scope='col'><a class = 'total-price-sort'>Total</a></th>" +
                 "</tr></thead><tbody>";
 
             for (let j = 0; j < lastOrders[i].products.length; j++) {
@@ -115,6 +130,13 @@
         }
 
         document.getElementById('data-viewer').innerHTML = strResult;
+
+        document.getElementsByClassName('manufacturer-sort')[0].addEventListener("click", () => sortModule.sortReports.manufacturerSort('ordersByDate'));
+        document.getElementsByClassName('model-sort')[0].addEventListener("click", () => sortModule.sortReports.modelSort('ordersByDate'));
+        document.getElementsByClassName('price-sort')[0].addEventListener("click", () => sortModule.sortReports.priceSort('ordersByDate'));
+        document.getElementsByClassName('quantity-sort')[0].addEventListener("click", () => sortModule.sortReports.quantitySort('ordersByDate'));
+        document.getElementsByClassName('total-price-sort')[0].addEventListener("click", () => sortModule.sortReports.totalMoneySort('ordersByDate'));
+
         accordion(); //site.js
     },
     salesByWorldAndRFCreateTable: function (reportModel) {
