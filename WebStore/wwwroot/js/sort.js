@@ -45,15 +45,15 @@
         },
         createTable: function (data, reportMethod) {
             switch (reportMethod) {
-                case 'moneyInCity': reportCreateTableModule.moneyInCityCreateTable(data);
+                case 'moneyInCity': reportCreateTableModule.reportsTableCreator.moneyInCityCreateTable(data);
                     break;
-                case 'productInStore': reportCreateTableModule.productInStoreCreateTable(data);
+                case 'productInStore': reportCreateTableModule.reportsTableCreator.productInStoreCreateTable(data);
                     break;
-                case 'category': reportCreateTableModule.categoryCreateTable(data);
+                case 'category': reportCreateTableModule.reportsTableCreator.categoryCreateTable(data);
                     break;
-                case 'product': reportCreateTableModule.productCreateTable(data);
+                case 'product': reportCreateTableModule.reportsTableCreator.productCreateTable(data);
                     break;
-                case 'ordersByDate': reportCreateTableModule.ordersByDateCreateTable(data);
+                case 'ordersByDate': reportCreateTableModule.reportsTableCreator.ordersByDateCreateTable(data);
                     break;
             }
         }
