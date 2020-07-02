@@ -9,4 +9,4 @@ MVC Project WebStore
 - На View-слой добавлены все отчеты из ReportController и CRUD из ProductController;
 - Реализовано полученией курса валют из API ЦБ https://www.cbr-xml-daily.ru/daily_json.js и конвертация в местную валюту при получении данных о заказе.
 
-Ссылка на базу данных - https://drive.google.com/open?id=1SQvPfAadkUthwdNdPkhbGonxoWgArIgk
+Ссылка на базу данных - https://drive.google.com/file/d/1U6ThmwKSKZIjPK-x06ukbx1TlEXza0ao/view?usp=sharing
