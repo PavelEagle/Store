@@ -140,6 +140,19 @@
     cursor: pointer;
 }
 
+.pagination-select {
+    position: absolute;
+    right: 275px;
+    width: 100px;
+    display: flex;
+}
+
+
+.select-pagination {
+    margin: 5px;
+    color: var(--navifation-btn-color);
+}
+
 
 
 

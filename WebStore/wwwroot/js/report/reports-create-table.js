@@ -1,6 +1,15 @@
 ﻿let reportCreateTableModule = {
     createTable: function (reportModel) {
         let titles = Object.keys(reportModel[0]);
+        paginationModule.getPageInfo().then(result => {
+            let strResult = "";
+            console.log(result);
+            for (let i = 0; i < result.Pages.length; i++) {
+                strResult += "<a href='#'>" + result.Pages[i] + "</a>"
+            }
+            document.getElementById('pages').innerHTML = strResult;
+        });
+
         let strResult = "<table class='table'><thead><tr>";
         for (let i = 0; i < titles.length; i++) {
             strResult += "<th scope='col'><a>" + titles[i][0].toUpperCase() + titles[i].substring(1) + "</a></th>";
@@ -14,7 +23,7 @@
                 strResult += "<td>" + values[j] + "</td>";
             }
         }
-        strResult += "</tbody></table>"
+        strResult += "</tbody></table>";
         document.getElementById('data-viewer').innerHTML = strResult;
     },
     getShortReportModel: function (reportModel) {
@@ -25,6 +34,7 @@
         }
         return reportShortModel;
     },
+    
     reportsTableCreator: {
         moneyInCityCreateTable: function (reportModel) {
             reportCreateTableModule.createTable(reportModel);

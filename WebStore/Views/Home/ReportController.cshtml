@@ -42,6 +42,11 @@
             </li>
         </ul>
         <output id="report-info" class="nav-link p-2">Report-info</output>
+        <div class="pagination-select">
+            <a id='pagination-10' class='select-pagination' href='#'>10</a>
+            <a id='pagination-25' class='select-pagination' href='#'>25</a>
+            <a id='pagination-50' class='select-pagination' href='#'>50</a>
+        </div>
         <form class="form-inline search-form p-2">
             <input id="search-area" class="form-control search-text" onSubmit="return false;" type="text" placeholder="Search" aria-label="Search">
             <button id="search-btn" type="button">Search</button>
@@ -50,6 +55,7 @@
 </nav>
 
 <div class="content">
+    <div id="pages"></div>
     <div id="date">
         <div class="d-flex justify-content-end">
             <span>StartDate: </span>
@@ -63,7 +69,9 @@
     </div>
 </div>
 
+<script src="~/js/pagination.js"></script>
 <script src="~/js/report/reports-animate.js"></script>
 <script src="~/js/report/reports-create-table.js"></script>
 <script src="~/js/report/reports-data.js"></script>
 <script src="~/js/report/reports-init.js"></script>
+
