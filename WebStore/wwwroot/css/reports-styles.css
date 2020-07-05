@@ -153,6 +153,16 @@
     color: var(--navifation-btn-color);
 }
 
+.page-selector {
+    margin: 2px;
+    font-size: 18px;
+    color: var(--navifation-btn-color);
+}
+
+.page-selector:hover {
+    color: red;
+}
+
 
 
 

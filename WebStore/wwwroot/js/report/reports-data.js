@@ -5,7 +5,7 @@
             .then((response) => response.json())
             .then((data) => {
                 reportCreateTableModule.reportsTableCreator.moneyInCityCreateTable(data);
-                console.log(data);
+                paginationModule.getPageInfo(data);
             });
         
         document.getElementById('report-info').innerHTML = "Money In City";
@@ -22,7 +22,9 @@
         fetch(url)
             .then((response) => response.json())
             .then((data) => {
-                reportCreateTableModule.reportsTableCreator.productInStoreCreateTable(data);
+                let dataShortModel = reportsDataModule.getShortReportModel(data);
+                paginationModule.getPageInfo(dataShortModel);
+                reportCreateTableModule.reportsTableCreator.productInStoreCreateTable(dataShortModel);
             });
 
         switch (method) {
@@ -37,6 +39,7 @@
         fetch('https://localhost:5001/api/report/category-with-five-and-more-products')
             .then((response) => response.json())
             .then((data) => {
+                paginationModule.getPageInfo(data);
                 reportCreateTableModule.reportsTableCreator.categoryCreateTable(data);
             });
 
@@ -54,7 +57,9 @@
         fetch(url)
             .then((response) => response.json())
             .then((data) => {
-                reportCreateTableModule.reportsTableCreator.productCreateTable(data);
+                let dataShortModel = reportsDataModule.getShortReportModel(data);
+                paginationModule.getPageInfo(dataShortModel);
+                reportCreateTableModule.reportsTableCreator.productCreateTable(dataShortModel);
             });
 
         switch (method) {
@@ -72,7 +77,8 @@
         fetch(url)
             .then((response) => response.json())
             .then((data) => {
-                reportCreateTableModule.reportsTableCreator.ordersByDateCreateTable(data);
+                let dataShortModel = reportsDataModule.getShortReportModel(data);
+                reportCreateTableModule.reportsTableCreator.ordersByDateCreateTable(dataShortModel);
             });
 
         function FormateDate(date) {
@@ -86,10 +92,19 @@
         fetch('https://localhost:5001/api/report/sales-by-world-and-rf')
             .then((response) => response.json())
             .then((data) => {
+                paginationModule.getPageInfo(data);
                 reportCreateTableModule.reportsTableCreator.salesByWorldAndRFCreateTable(data);
             });
 
         document.getElementById('report-info').innerHTML = "Sales By World And RF";
+    },
+    getShortReportModel: function (reportModel) {
+        let reportModelLength, reportShortModel = [];
+        reportModelLength = reportModel.length > 100 ? 100 : reportModel.length;
+        for (let i = 0; i < reportModelLength; i++) {
+            reportShortModel.push(reportModel[i]);
+        }
+        return reportShortModel;
     }
 }
 

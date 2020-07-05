@@ -5,6 +5,7 @@
     showCalendar: function () {
         document.getElementById('data-viewer').innerHTML = ' ';
         document.getElementById('date').style.display = 'block';
+        document.getElementById('pages').innerHTML = '';
     }
 }
 

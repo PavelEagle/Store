@@ -1,15 +1,6 @@
 ﻿let reportCreateTableModule = {
     createTable: function (reportModel) {
         let titles = Object.keys(reportModel[0]);
-        paginationModule.getPageInfo().then(result => {
-            let strResult = "";
-            console.log(result);
-            for (let i = 0; i < result.Pages.length; i++) {
-                strResult += "<a href='#'>" + result.Pages[i] + "</a>"
-            }
-            document.getElementById('pages').innerHTML = strResult;
-        });
-
         let strResult = "<table class='table'><thead><tr>";
         for (let i = 0; i < titles.length; i++) {
             strResult += "<th scope='col'><a>" + titles[i][0].toUpperCase() + titles[i].substring(1) + "</a></th>";
@@ -26,15 +17,7 @@
         strResult += "</tbody></table>";
         document.getElementById('data-viewer').innerHTML = strResult;
     },
-    getShortReportModel: function (reportModel) {
-        let reportModelLength, reportShortModel = [];
-        reportModelLength = reportModel.length > 100 ? 100 : reportModel.length;
-        for (let i = 0; i < reportModelLength; i++) {
-            reportShortModel.push(reportModel[i]);
-        }
-        return reportShortModel;
-    },
-    
+   
     reportsTableCreator: {
         moneyInCityCreateTable: function (reportModel) {
             reportCreateTableModule.createTable(reportModel);
@@ -47,8 +30,8 @@
             document.getElementsByClassName('total-money-sort')[0].addEventListener("click", () => sortModule.sortReports.totalMoneySort('moneyInCity'));
         },
         productInStoreCreateTable: function (reportModel) {
-            let reportShortModel = reportCreateTableModule.getShortReportModel(reportModel);
-            reportCreateTableModule.createTable(reportShortModel);
+            
+            reportCreateTableModule.createTable(reportModel);
 
             let linkForSort = document.getElementsByTagName('thead')[0].getElementsByTagName('a');
             linkForSort[0].classList.add('city-sort');
@@ -74,8 +57,7 @@
             document.getElementsByClassName('count-of-products-sort')[0].addEventListener("click", () => sortModule.sortReports.countProductSort('category'));
         },
         productCreateTable: function (reportModel) {
-            let reportShortModel = reportCreateTableModule.getShortReportModel(reportModel);
-            reportCreateTableModule.createTable(reportShortModel);
+            reportCreateTableModule.createTable(reportModel);
 
             let linkForSort = document.getElementsByTagName('thead')[0].getElementsByTagName('a');
             linkForSort[0].classList.add('manufacturer-sort');
