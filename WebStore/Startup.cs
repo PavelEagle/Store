@@ -16,6 +16,7 @@ namespace WebStore
     {
         public Startup(IWebHostEnvironment env)
         {
+	var aa = 5;
             var builder = new ConfigurationBuilder();
 
             builder.AddJsonFile("config.json", false, true);
